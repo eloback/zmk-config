@@ -19,7 +19,7 @@
 #define X_MB    &none &none
 #define X_RB    &none
 
-/ * Lower Left Row */
+/* Lower Left Row */
 #define X_LH    &none &none &none &kp LEFT &kp RIGHT 
 /* End PgDown BackSpace Delete */
 #define X_MH    &none &none
