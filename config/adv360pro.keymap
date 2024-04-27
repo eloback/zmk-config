@@ -9,16 +9,20 @@
 #define X_RT    &kp MINUS
 
 #define X_LM    &kp ESC
+/* Mod2 ~ 4 Thumb cluster keys ~ Mod4 */
 #define X_MM    &none &none &none &none &none &none
 #define X_RM    &none
 
 
-#define X_LB    &kp N6
-#define X_MB    &kp N7 &kp N8
-#define X_RB    &kp N9
+#define X_LB    &none
+/* Home and PgUp */
+#define X_MB    &none &none
+#define X_RB    &none
 
-#define X_LH    &kp Q &kp W &kp E &kp LEFT &kp RIGHT 
-#define X_MH    &kp R &kp T &kp Y &kp U &kp I &kp O &kp P &kp A
-#define X_RH    &kp UP &kp DOWN &kp N1 &kp N2 &kp N2
+/ * Lower Left Row */
+#define X_LH    &none &none &none &kp LEFT &kp RIGHT 
+/* End PgDown BackSpace Delete */
+#define X_MH    &none &none
+#define X_RH    &kp UP &kp DOWN &none &none &none
 
 #include "base.keymap"
