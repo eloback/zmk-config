@@ -210,6 +210,13 @@ ZMK_MACRO(win_sleep,
     bindings = <&kp LG(X) &kp U &kp S>;
 )
 
+// sticky lgui + numword
+ZMK_MACRO(goto_desktop,
+    wait-ms = <0>;
+    tap-ms = <5>;
+    bindings = <&sk LGUI &sl NUM>;
+)
+
 // misc aliases
 #define CANCEL      &kp K_CANCEL             // cancel caps-word, num-word and smart-mouse
 // #define DSK_PREV    &hmr LCTRL LG(LC(LEFT))   // previous desktop
@@ -237,7 +244,7 @@ ZMK_LAYER(base,
 
 ZMK_LAYER(nav,
 //╭──────╮ ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮ ╭──────╮ ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮ ╭──────╮
-    X_LT     ___           ___           &kp LS(TAB)   &swapper      ___             X_MT     ___           NAV_BSPC      ___           NAV_DEL       &kp PG_UP       X_RT
+    X_LT     ___           ___           &kp LG(K)     &kp LG(J)     &goto_desktop   X_MT     ___           NAV_BSPC      ___           NAV_DEL       &kp PG_UP       X_RT
 //├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤
     X_LM     &sk LGUI      &sk LALT      &sk LSHFT     &sk LCTRL     &kp LC(B)       X_MM     NAV_LEFT      NAV_DOWN      NAV_UP        NAV_RIGHT     &kp PG_DN       X_RM
 //├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤
