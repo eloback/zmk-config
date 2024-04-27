@@ -4,9 +4,11 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: urob
       url-base: https://github.com/urob
+    - name: eloback
+      url-base: https://github.com/eloback
   projects:
     - name: zmk
-      remote: urob
+      remote: eloback
       revision: main
       import: app/west.yml
     - name: zmk-helpers
