@@ -2,28 +2,25 @@
 #include "zmk-helpers/key-labels/adv360_custom.h"
 
 #define X_LT  \
-                &kp EQUAL &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &bootloader &bootloader &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp MINUS \
+                &kp EQUAL &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &bootloader &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp MINUS \
                 &kp TAB
 
-#define X_MT    &none &none
-#define X_RT    &kp MINUS
+#define X_MT    &none
+#define X_RT    &kp BACKSLASH
 
 #define X_LM    &kp ESC
-/* Mod2 ~ 4 Thumb cluster keys ~ Mod4 */
-#define X_MM    &none &none &none &none &none &none
-#define X_RM    &none
+#define X_MM    &none
+#define X_RM    &kp ESC
 
 
 #define X_LB    &none
-/* Home and PgUp */
-#define X_MB    &none &none
 #define X_RB    &none
 
-/* Lower Left Row */
-#define X_LH    &none &none &none &kp LEFT &kp RIGHT 
-/* End PgDown BackSpace Delete */
+#define X_LH    \
+                &none &none &none &kp LEFT &kp RIGHT &kp UP &kp DOWN &none &none &none \
+                &none &none &none &none
 #define X_MH    &none &none
-#define X_RH    &kp UP &kp DOWN &none &none &none
+#define X_RH    &none &none
 
 #include "base.keymap"
 / { chosen { zmk,matrix_transform = &urobs_transform; }; };
