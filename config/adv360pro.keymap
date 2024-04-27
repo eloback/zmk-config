@@ -5,12 +5,12 @@
                 &kp EQUAL &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &bootloader &bootloader &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp MINUS \
                 &kp TAB
 
-#define X_MT    &kp N1 &kp N2
+#define X_MT    &none &none
 #define X_RT    &kp MINUS
 
 #define X_LM    &kp ESC
-#define X_MM    &kp N3 &kp N4 
-#define X_RM    &kp N5
+#define X_MM    &none &none &none &none &none &none
+#define X_RM    &none
 
 
 #define X_LB    &kp N6
@@ -19,6 +19,6 @@
 
 #define X_LH    &kp Q &kp W &kp E &kp LEFT &kp RIGHT 
 #define X_MH    &kp R &kp T &kp Y &kp U &kp I &kp O &kp P &kp A
-#define X_RH    &kp UP &kp DOWN &none &none &none
+#define X_RH    &kp UP &kp DOWN &kp N1 &kp N2 &kp N2
 
 #include "base.keymap"
