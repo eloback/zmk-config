@@ -26,3 +26,4 @@
 #define X_RH    &kp UP &kp DOWN &none &none &none
 
 #include "base.keymap"
+/ { chosen { zmk,matrix_transform = &urobs_transform; }; };
