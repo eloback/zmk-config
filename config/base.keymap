@@ -215,8 +215,7 @@ ZMK_MACRO(win_sleep,
 ZMK_MACRO(goto_desktop,
     wait-ms = <0>;
     tap-ms = <5>;
-    bindings = <&sk MOD_LGUI>, <&num_word>;
-
+    bindings = <&num_word &sk LGUI>;
 )
 
 ZMK_MOD_MORPH(move_down,
