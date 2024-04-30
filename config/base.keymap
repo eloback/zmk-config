@@ -280,6 +280,26 @@ ZMK_TAP_DANCE(phone,
     bindings = <&phone1 &phone2>;
 )
 
+// help macros, to bootload the keyboard
+// mkl - move keyboard left
+ZMK_MACRO(mkl,
+          wait-ms = <0>;
+          tap-ms = <5>;
+          bindings = <&kp M &kp K &kp L>;
+)
+// mkr - move keyboard right
+ZMK_MACRO(mkr,
+          wait-ms = <0>;
+          tap-ms = <5>;
+          bindings = <&kp M &kp K &kp R>;
+)
+// mall - mount all ("mount any" may be more fitting)
+ZMK_MACRO(mall,
+          wait-ms = <0>;
+          tap-ms = <5>;
+          bindings = <&kp M &kp A &kp L>;
+)
+
 // misc aliases
 #define CANCEL      &kp K_CANCEL             // cancel caps-word, num-word and smart-mouse
 // #define DSK_PREV    &hmr LCTRL LG(LC(LEFT))   // previous desktop

@@ -2,10 +2,10 @@
 #include "zmk-helpers/key-labels/adv360_custom.h"
 
 /* map 360's extra keys */
-#define X_LT    &bl BL_TOG &rgb_ug RGB_TOG &bl BL_INC &bl BL_DEC &none &rgb_ug RGB_MEFS_CMD 5 &bootloader     &bootloader &rgb_ug RGB_MEFS_CMD 5 &none &none &none &none &none \
-                &kp TAB
+#define X_LT    &bl BL_TOG &rgb_ug RGB_TOG &bl BL_INC &bl BL_DEC &mkl &rgb_ug RGB_MEFS_CMD 5 &bootloader     &bootloader &rgb_ug RGB_MEFS_CMD 5 &mkr &none &none &none &none \
+                &mall
 #define X_MT    &none &none
-#define X_RT    &none
+#define X_RT    &mall
 
 #define X_LM    &kp ESC
 #define X_MM    &none &none
