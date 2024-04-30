@@ -17,8 +17,8 @@
 #define NUM 3
 #define SYS 4
 #define UC 5
-#define MOUSE 6
-#define MACRO 7
+// #define MOUSE 6
+#define MACRO 6
 
 #include "combos.dtsi"  // requires layer aliases
 // #include "mouse.dtsi"
