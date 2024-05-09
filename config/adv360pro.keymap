@@ -27,7 +27,7 @@
 #define X_RB    &kp RSHFT
 
 #define X_LH    &none &kp GRAVE &kp CAPS &kp LEFT &kp RIGHT     &kp UP &kp DOWN &none &none &none \
-                &kp LCTRL &kp LALT      &kp LGUI  &kp RCTRL
+                &kp PRTSCR  &kp LG(LC(PRTSCR))   &kp LGUI  &kp RCTRL
 #define X_MH    &kp HOME    &kp PG_UP
 #define X_RH    &kp END     &kp PG_DN
 
