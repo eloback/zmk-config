@@ -20,7 +20,7 @@
 #define X_RT    &kp RALT
 
 #define X_LM    &kp LGUI
-#define X_MM    &to 0 &to 0
+#define X_MM    &tog 8 &tog 8
 #define X_RM    &kp RGUI
 
 #define X_LB    &kp LCTRL
