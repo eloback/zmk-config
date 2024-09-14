@@ -19,14 +19,15 @@
 #define X_MT    &to 0 &to 0
 #define X_RT    &kp RALT
 
-#define X_LM    &kp LGUI
+#define X_LM    &kp ESC
 #define X_MM    &tog 8 &tog 8
-#define X_RM    &kp RGUI
+#define X_RM    &kp RET
 
-#define X_LB    &kp LCTRL
-#define X_RB    &kp RCTRL
+#define X_LB    &kp LSHFT
+#define X_RB    &kp RSHFT
 
-#define X_LH    &none &kp GRAVE &kp CAPS &kp LEFT &kp RIGHT     &kp UP &kp DOWN &none &none &none \
+
+#define X_LH    &kp LCTRL &kp LGUI &none &kp LEFT &kp RIGHT     &kp UP &kp DOWN &none &none &none \
                 &kp PSCRN  &kp LG(LC(PSCRN))   &kp LGUI  &kp RCTRL
 #define X_MH    &kp HOME    &kp PG_UP
 #define X_RH    &kp END     &kp PG_DN

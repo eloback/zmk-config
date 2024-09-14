@@ -2,8 +2,8 @@
 let
   firmware_path = "~/Downloads/firmware.zip";
   firmware_out_path = "/tmp/adv360pro-firmware";
-  left_mount_path = "/mnt/left";
-  right_mount_path = "/mnt/right";
+  left_mount_path = "/media/left";
+  right_mount_path = "/media/right";
   left_device_path = "/dev/disk/by-id/usb-Adafruit_nRF_UF2_92C5A21B39C4917B-0:0";
   right_device_path = "/dev/disk/by-id/usb-Adafruit_nRF_UF2_47AB871917154762-0:0";
   unmountKeyboardBySide = side: ''
