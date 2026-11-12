@@ -69,8 +69,8 @@
 #define RB4 52
 #define RB5 53
 
-#define LH0 70  // left thumb keys
-#define LH1 69
+#define LH0 69  // left thumb keys (69 inner big key, 68 outer big key)
+#define LH1 68
 #define LH2 74
 
 #define RH0 72  // right thumb keys
