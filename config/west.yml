@@ -49,6 +49,7 @@ manifest:
           - hal_nordic
           - mbedtls
           - nanopb
+          - picolibc # needed by non-SDK toolchains (nix build)
           - tinycrypt
 
   self:
