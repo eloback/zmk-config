@@ -1,0 +1,43 @@
+name: Draw keymap
+# Redraws img/keymap.svg (keymap-drawer, see draw/draw.sh) whenever the
+# keymap or the draw config changes, and commits the result.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - config/**
+      - draw/config.yaml
+      - draw/draw.sh
+      - flake.nix
+      - flake.lock
+      - .github/workflows/draw.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: draw-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  draw:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+
+      # Same as running `nix run .#draw` locally.
+      - run: nix run .#draw
+
+      - name: Commit the drawing if it changed
+        run: |
+          git add img/keymap.svg draw/keymap.yaml
+          if git diff --cached --quiet; then
+            echo "keymap drawing is up to date"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(draw): redraw keymap"
+          git push

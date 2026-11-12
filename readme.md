@@ -33,7 +33,13 @@ compatible with Zephyr 3.0 is available
   [build-scripts](https://github.com/urob/zmk-config/tree/main/scripts#readme)
   for local and Docker-based building (independently of VS Code)
 
-![](img/keymap.png)
+![Keymap of the Advantage 360 Pro: all layers and combos](img/keymap.svg)
+
+The drawing is generated with
+[keymap-drawer](https://github.com/caksoylar/keymap-drawer) from
+`config/adv360pro.keymap`. CI redraws and commits it on every keymap change
+(`.github/workflows/draw.yml`). To redraw locally, run `nix run .#draw`. Labels
+and styling live in `draw/config.yaml`.
 
 ## Timeless homerow mods
 

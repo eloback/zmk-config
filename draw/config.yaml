@@ -1,0 +1,115 @@
+# keymap-drawer config, used by draw/draw.sh (`nix run .#draw`).
+# Docs: https://github.com/caksoylar/keymap-drawer/blob/main/CONFIGURATION.md
+draw_config:
+  key_w: 60
+  key_h: 56
+  split_gap: 30
+  combo_w: 26
+  combo_h: 22
+  footer_text: ""
+
+parse_config:
+  # draw.sh adds zmk_additional_includes (zmk-helpers) and the physical layout
+
+  raw_binding_map:
+    "&sys_reset": Reset
+    "&bootloader": Boot
+    "&studio_unlock": Studio
+    "&caps_word": Caps Word
+    "&swapper": { t: Alt-Tab, s: swapper }
+    "&tog GAME": { t: Game, s: toggle }
+    "&to 0": { t: Base, s: to }
+
+    "&kp LC(INS)": Copy
+    "&kp LC(X)": Cut
+    "&kp LC(V)": Paste
+    "&kp LS(INS)": Paste
+    "&kp LC(A)": tmux
+
+    "&dot_spc": Sentence
+    "&spc_morph": Space
+    "&num_dance": { t: Smart Num }
+    "&smart_mouse": Smart Mouse
+    "&key_repeat": Repeat
+    "&leader": Leader
+    "&comma_morph": { t: ",", s: ";" }
+    "&dot_morph": { t: ".", s: ":" }
+    "&qexcl": { t: "?", s: "!" }
+
+    "&shift_repeat": Magic
+    "&win_sleep": Sleep
+    "&mmv MOVE_UP": Mouse ↑
+    "&mmv MOVE_DOWN": Mouse ↓
+    "&mmv MOVE_LEFT": Mouse ←
+    "&mmv MOVE_RIGHT": Mouse →
+    "&msc SCRL_UP": Scroll ↑
+    "&msc SCRL_DOWN": Scroll ↓
+    "&msc SCRL_LEFT": Scroll ←
+    "&msc SCRL_RIGHT": Scroll →
+
+    "&mkp LCLK": Left Click
+    "&mkp RCLK": Right Click
+    "&mkp MCLK": Middle Click
+
+  trans_legend: { t: "", type: trans }
+
+  zmk_keycode_map:
+    LALT: Alt
+    RALT: AltGr
+    LCTRL: Ctrl
+    RCTRL: Ctrl
+    LGUI: Gui
+    RGUI: Gui
+    LSHFT: Shift
+    RSHFT: Shift
+    SPACE: Space
+    RET: Enter
+    TAB: Tab
+    ESC: Esc
+    BSPC: Bksp
+    DEL: Del
+    PSCRN: PrtSc
+    PG_UP: PgUp
+    PG_DN: PgDn
+    C_MUTE: Mute
+    C_PP: Play
+    C_VOL_DN: Vol-
+    C_VOL_UP: Vol+
+    C_PREV: Prev
+    C_NEXT: Next
+    GRAVE: "`"
+    MINUS: "-"
+    EQUAL: "="
+    SEMICOLON: ";"
+    SQT: "'"
+    COMMA: ","
+    DOT: "."
+    FSLH: "/"
+    HOME: Home
+    END: End
+    INS: Ins
+    RETURN: Enter
+    AT: "@"
+    HASH: "#"
+    DLLR: "$"
+    PRCNT: "%"
+    CARET: "^"
+    PLUS: "+"
+    STAR: "*"
+    AMPS: "&"
+    UNDER: "_"
+    PIPE: "|"
+    BSLH: "\\"
+    TILDE: "~"
+    LT: "<"
+    GT: ">"
+    LPAR: "("
+    RPAR: ")"
+    LBRC: "{"
+    RBRC: "}"
+    LBKT: "["
+    RBKT: "]"
+    LEFT: ←
+    RIGHT: →
+    UP: ↑
+    DOWN: ↓
