@@ -4,7 +4,7 @@
   # Local alternative to the GitHub Actions build (build.yaml). Usage:
   #
   #   nix build          # ./result/zmk_left.uf2 and ./result/zmk_right.uf2
-  #   nix run .#flash    # flash both halves, one after the other
+  #   nix run .#flash    # flash both halves, right first, then left
   #   nix run .#flash -- left
   #
   # When config/west.yml changes, the build fails with a hash mismatch for
@@ -36,6 +36,13 @@
         # Matches build.yaml: Studio is only built into the central (left) half.
         board = "adv360pro_%PART%//zmk";
         enableZmkStudio = true;
+
+        # `nix run .#flash` flashes parts in this order. Right goes first so
+        # the halves are still connected and the right half's &bootloader key
+        # works. Flash left first and a split-protocol change can strand the
+        # right half until you use its pinhole reset button.
+        parts = ["right" "left"];
+        centralPart = "left";
 
         zephyrDepsHash = "sha256-j/+xWtd/uqwdgna25I8uQBFwotMoTNcLdPOtEmUASHU=";
 
