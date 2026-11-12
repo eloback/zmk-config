@@ -4,15 +4,16 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: urob
       url-base: https://github.com/urob
-    - name: eloback
-      url-base: https://github.com/eloback
   projects:
     - name: zmk
-      remote: eloback
-      revision: adv360-z3.5
+      remote: zmkfirmware
+      revision: 4dd95d7840eb3d5a3f59bb29fbf1ab054715ef85 # main (2026-10-09)
       import: app/west.yml
     - name: zmk-helpers
       remote: urob
       revision: v2
+    - name: zmk-auto-layer # num-word
+      remote: urob
+      revision: b50d514219c5ad61198f9a8be137c59d0674b11c # main
   self:
     path: config
