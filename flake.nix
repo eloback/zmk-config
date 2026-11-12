@@ -1,7 +1,7 @@
 {
   description = "ZMK firmware for the Kinesis Advantage 360 Pro";
 
-  # Local alternative to the GitHub Actions build (build.yaml). Usage:
+  # Builds the firmware locally and in CI (.github/workflows/build.yml). Usage:
   #
   #   nix build          # ./result/zmk_left.uf2 and ./result/zmk_right.uf2
   #   nix run .#flash    # flash both halves, right first, then left
@@ -33,7 +33,7 @@
 
         src = nixpkgs.lib.sourceFilesBySuffices ./. [".conf" ".dtsi" ".h" ".keymap" ".overlay" ".yml"];
 
-        # Matches build.yaml: Studio is only built into the central (left) half.
+        # Studio is only built into the central (left) half.
         board = "adv360pro_%PART%//zmk";
         enableZmkStudio = true;
 
@@ -54,6 +54,11 @@
       };
 
       flash = zmk-nix.packages.${system}.flash.override {inherit firmware;};
+    });
+
+    # west and the ARM toolchain, for poking at the build by hand (.envrc).
+    devShells = forAllSystems (system: {
+      default = zmk-nix.devShells.${system}.default;
     });
   };
 }

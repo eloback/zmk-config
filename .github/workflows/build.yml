@@ -1,6 +1,39 @@
 name: Build ZMK firmware
-on: [push, pull_request, workflow_dispatch]
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - config/**
+      - flake.nix
+      - flake.lock
+      - .github/workflows/build.yml
+  pull_request:
+    paths:
+      - config/**
+      - flake.nix
+      - flake.lock
+      - .github/workflows/build.yml
+
+permissions:
+  contents: read
 
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+
+      # Same build as `nix build` locally.
+      - run: nix build -L
+
+      - name: Rename firmware
+        run: |
+          mkdir firmware
+          cp result/zmk_left.uf2 firmware/adv360pro_left-zmk.uf2
+          cp result/zmk_right.uf2 firmware/adv360pro_right-zmk.uf2
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: firmware
+          path: firmware/*.uf2
