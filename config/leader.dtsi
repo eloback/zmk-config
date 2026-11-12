@@ -48,7 +48,8 @@ ZMK_LEADER_SEQUENCE(el_omega,   &uc UC_EL_OMEGA,      E W)  // ω
 
 // BLE and USB
 #ifdef CONFIG_WIRELESS
-ZMK_LEADER_SEQUENCE(usb,        &out OUT_USB,   U S B)
+// Not "U S B": "U" alone is ü, and nested sequences never fire.
+ZMK_LEADER_SEQUENCE(usb,        &out OUT_USB,   W I R E)
 ZMK_LEADER_SEQUENCE(ble,        &out OUT_BLE,   B L E)
 #endif // CONFIG_WIRELESS
 ZMK_LEADER_SEQUENCE(reset,      &sys_reset,     R E S E T)
