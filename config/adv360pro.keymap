@@ -20,7 +20,7 @@
 #define X_RT    &kp RALT
 
 #define X_LM    &kp ESC
-#define X_MM    &tog 8 &tog 8
+#define X_MM    &tog GAME &tog GAME
 #define X_RM    &kp RET
 
 #define X_LB    &kp LSHFT
@@ -28,7 +28,7 @@
 
 
 #define X_LH    &kp LCTRL &kp LGUI &kp LALT &kp LEFT &kp RIGHT     &kp UP &kp DOWN &none &none &none \
-                &kt LALT    &tog 8            &kp RGUI  &kp RCTRL
+                &kt LALT    &tog GAME            &kp RGUI  &kp RCTRL
 #define X_MH    &kp HOME    &kp PG_UP
 #define X_RH    &kp END     &kp PG_DN
 
@@ -38,13 +38,13 @@
 #define G_X_MT  &kp N5 &to 0
 
 #define G_X_LM  &kp H
-#define G_X_MM  &kp G &tog 8
+#define G_X_MM  &kp G &tog GAME
 #define G_X_RM  &kp RET
 
 #define G_X_LB  &kp B
 
 #define G_X_LH  &kp I     &kp LGUI &kp RET &kp LEFT &kp RIGHT     &kp UP &kp DOWN &none &none &none \
-                &kt LALT     &tog 8            &kp RGUI  &kp RCTRL
+                &kt LALT     &tog GAME            &kp RGUI  &kp RCTRL
 #define G_X_MH  &kp M       &kp PG_UP
 #define G_X_RH  &kp T       &kp PG_DN
 
