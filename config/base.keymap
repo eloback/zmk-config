@@ -22,6 +22,7 @@
 #define GOTO 6
 #define GAME 7
 #define MOUSE 8
+#define GAME_FN 9
 
 #include "extra_keys.h"
 
@@ -157,6 +158,14 @@ ZMK_TRI_STATE(smart_mouse,
     bindings = <&tog MOUSE>, <&none>, <&tog MOUSE>;
     ignored-key-positions = <LT1 LT3 LH0 LH1 RT1 RT2 RT3 RM0 RM1 RM2 RM3 RM4 RB1 RB2 RB3 RH0 RH1>;
     ignored-layers = <MOUSE NAV FN>;
+)
+
+// swapper (urob's alt-tab): first tap = Alt+Tab with Alt held, more taps =
+// Tab, Shift (LM4 on the game layer, LB5/RB5 on the others) + tap goes back,
+// any other key releases Alt. Requires zmk-tri-state module.
+ZMK_TRI_STATE(swapper,
+    bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
+    ignored-key-positions = <LM4 LB5 RB5>;
 )
 
 /* Custom behaviors */
@@ -409,9 +418,9 @@ ZMK_LAYER(game,
 //├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤
     G_X_LM   &kp LSHFT       &kp A         &kp S         &kp D         &kp F        G_X_MM     &kp H         &kp J         &kp K         &kp L         &kp SEMICOLON   G_X_RM
 //├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤
-    G_X_LB   &kp LCTRL       &kp Z         &kp X         &kp C         &kp V          X_MB     &kp N         &kp M         &comma_morph  &dot_morph    &qexcl          X_RB
+    G_X_LB   &kp LCTRL       &kp Z         &kp X         &kp C         &kp V          X_MB     &kp N         &kp M         &kp COMMA     &kp DOT       &kp FSLH        X_RB
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┴───────────────────────────╯ ├──────┤
-    G_X_LH                                              &kp SPACE      &kp LALT     G_X_MH     &kp V         &kp N                                                     X_RH
+    G_X_LH                                              &kp SPACE      &kp LALT     G_X_MH     &kp V         &kp N                                                     G_X_RH
 //╰──────╯                                           ╰─────────────┴─────────────╯ ╰──────╯ ╰─────────────┴─────────────╯                                           ╰──────╯
 )
 
@@ -425,6 +434,19 @@ ZMK_LAYER(mouse,
     X_LB     ___           ___           ___           ___           ___             X_MB     ___           &mkp LCLK     &mkp MCLK     &mkp RCLK     ___             X_RB
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┴───────────────────────────╯ ├──────┤
     X_LH                                               ___           ___             X_MH     U_WH_U        U_WH_D                                                    X_RH
+//╰──────╯                                           ╰─────────────┴─────────────╯ ╰──────╯ ╰─────────────┴─────────────╯                                           ╰──────╯
+)
+
+// held on the game layer's bottom small left-thumb key (F-keys, 6-0, extras)
+ZMK_LAYER(game_fn,
+//╭──────╮ ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮ ╭──────╮ ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮ ╭──────╮
+    GF_X_LT  ___           &kp N6        &kp N7        &kp N8        &kp N9        GF_X_MT    ___           ___           ___           ___           ___             X_RT
+//├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤
+    GF_X_LM  ___           &kp F7        &kp F8        &kp F9        &kp F10       GF_X_MM    ___           ___           ___           ___           ___             X_RM
+//├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤
+    GF_X_LB  ___           &kp F12       &kp GRAVE     &kp MINUS     &kp EQUAL       X_MB     ___           ___           ___           ___           ___             X_RB
+//├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┴───────────────────────────╯ ├──────┤
+    GF_X_LH                                             ___           ___          GF_X_MH    ___           ___                                                       GF_X_RH
 //╰──────╯                                           ╰─────────────┴─────────────╯ ╰──────╯ ╰─────────────┴─────────────╯                                           ╰──────╯
 )
 
