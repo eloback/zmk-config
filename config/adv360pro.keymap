@@ -11,7 +11,7 @@
                  ╰───────╮ 74 │ 75 ╭───────╯                                 ╰───────╮ -- │ -- ╭───────╯
                          ╰────┴────╯                                                 ╰────┴────╯ *//* source key position labels */
 
-#include "zmk-helpers/key-labels/adv360_custom.h"
+#include "adv360_custom.h"  // urob key order, vendored from zmk-helpers v2
 
 /* map 360's extra keys */
 #define X_LT    &none &kp N5 &kp N1 &kp N2 &kp N3 &kp N4 &bootloader     &bootloader &none &kp N7 &kp N8 &kp N9 &none &studio_unlock \

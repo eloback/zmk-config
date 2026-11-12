@@ -1,19 +1,55 @@
+# Pinned to the same revisions as urob/zmk-config (2026-11).
+# To bump: update the revisions below (or run `pin-west bump`, see urob/pin-west).
+---
 manifest:
+  defaults:
+    remote: urob
+
   remotes:
-    - name: zmkfirmware
-      url-base: https://github.com/zmkfirmware
     - name: urob
       url-base: https://github.com/urob
+    - name: zmkfirmware
+      url-base: https://github.com/zmkfirmware
+
   projects:
     - name: zmk
       remote: zmkfirmware
-      revision: 4dd95d7840eb3d5a3f59bb29fbf1ab054715ef85 # main (2026-10-09)
+      revision: 4dd95d7840eb3d5a3f59bb29fbf1ab054715ef85 # main (2026-10-19)
       import: app/west.yml
-    - name: zmk-helpers
-      remote: urob
-      revision: v2
+
+    # ZMK modules
+    - name: zmk-adaptive-key # magic-shift
+      path: modules/zmk/adaptive-key
+      revision: e987227d625e8863343baf16bd11ff90310482a5 # main (2026-10-19)
     - name: zmk-auto-layer # num-word
-      remote: urob
-      revision: b50d514219c5ad61198f9a8be137c59d0674b11c # main
+      path: modules/zmk/auto-layer
+      revision: b50d514219c5ad61198f9a8be137c59d0674b11c # main (2026-10-19)
+    - name: zmk-helpers
+      path: modules/zmk/helpers
+      revision: 7bcba18fc8df27303eb92a435d33ea870cc51f98 # main (2026-10-19)
+    - name: zmk-leader-key # unicode/system sequences
+      path: modules/zmk/leader-key
+      revision: 4745294d5f2bc12bbdf91471dd85bfbdbb35c47d # main (2026-10-19)
+    - name: zmk-tri-state # smart-mouse
+      path: modules/zmk/tri-state
+      revision: c08969627245adeddbcdb6dfc1a4c167c04160e2 # main (2026-10-19)
+    - name: zmk-unicode
+      path: modules/zmk/unicode
+      revision: a1ee16236de5f912a57cd4fe619b0d63b94ea9e5 # main (2026-11-09)
+
+    # Avoid downloading GBs of unused Zephyr modules. nanopb is needed by ZMK
+    # Studio. Remove this section to restore the default.
+    - name: zephyr
+      remote: zmkfirmware
+      revision: 10ba6d0cb38bc3d258775d27982f707599320085 # v4.1.0+zmk-fixes (2026-08-18)
+      clone-depth: 1
+      import:
+        name-allowlist:
+          - cmsis
+          - hal_nordic
+          - mbedtls
+          - nanopb
+          - tinycrypt
+
   self:
     path: config
