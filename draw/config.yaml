@@ -18,6 +18,7 @@ parse_config:
     "&caps_word": Caps Word
     "&swapper": { t: Alt-Tab, s: swapper }
     "&tog GAME": { t: Game, s: toggle }
+    "&tog DOTA_SEL": { t: Dota, s: mode }
     "&to 0": { t: Base, s: to }
 
     "&kp LC(INS)": Copy

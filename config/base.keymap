@@ -14,15 +14,17 @@
 #endif
 
 #define DEF 0
-#define NAV 1
-#define FN 2
-#define NUM 3
-#define SYS 4
-#define MACRO 5
-#define GOTO 6
-#define GAME 7
-#define MOUSE 8
-#define GAME_FN 9
+#define DOTA_SEL 1  // all-transparent flag, right above base so combos still fire
+#define NAV 2
+#define FN 3
+#define NUM 4
+#define SYS 5
+#define MACRO 6
+#define GOTO 7
+#define GAME 8
+#define MOUSE 9
+#define DOTA 10
+#define GAME_FN 11
 
 #include "extra_keys.h"
 
@@ -161,11 +163,12 @@ ZMK_TRI_STATE(smart_mouse,
 )
 
 // swapper (urob's alt-tab): first tap = Alt+Tab with Alt held, more taps =
-// Tab, Shift (LM4 on the game layer, LB5/RB5 on the others) + tap goes back,
-// any other key releases Alt. Requires zmk-tri-state module.
+// Tab, Shift (LM4 on the game layer, the 360's small left thumb key, 70, on
+// the dota layer, LB5/RB5 on the others) + tap goes back, any other key
+// releases Alt. Requires zmk-tri-state module.
 ZMK_TRI_STATE(swapper,
     bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
-    ignored-key-positions = <LM4 LB5 RB5>;
+    ignored-key-positions = <LM4 LB5 RB5 70>;
 )
 
 /* Custom behaviors */
@@ -327,6 +330,7 @@ ZMK_MACRO(mall,
 /* Keymap */
 
 ZMK_CONDITIONAL_LAYER(sys, FN NUM, SYS)  // FN + NUM --> SYS
+ZMK_CONDITIONAL_LAYER(dota, GAME DOTA_SEL, DOTA)  // GAME + DOTA_SEL --> DOTA
 
 ZMK_LAYER(base,
 //╭──────╮ ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮ ╭──────╮ ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮ ╭──────╮
@@ -337,6 +341,20 @@ ZMK_LAYER(base,
     X_LB     &kp Z         &kp X         &kp C         &kp V         &kp B           X_MB     &kp N         &kp M         &comma_morph  &dot_morph    &qexcl          X_RB
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┴───────────────────────────╯ ├──────┤
     X_LH                                               &lt_spc NAV 0 &lt FN RET      X_MH     SMART_NUM     MAGIC_SHIFT                                              X_RH
+//╰──────╯                                           ╰─────────────┴─────────────╯ ╰──────╯ ╰─────────────┴─────────────╯                                           ╰──────╯
+)
+
+// flag layer, all transparent: when on, game mode is the Dota 2 variant.
+// Toggled with game_fn + LM4, cleared by &to 0.
+ZMK_LAYER(dota_sel,
+//╭──────╮ ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮ ╭──────╮ ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮ ╭──────╮
+    T_X_LT   ___           ___           ___           ___           ___             T_X_MT   ___           ___           ___           ___           ___             T_X_RT
+//├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤
+    T_X_LM   ___           ___           ___           ___           ___             T_X_MM   ___           ___           ___           ___           ___             T_X_RM
+//├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤
+    T_X_LB   ___           ___           ___           ___           ___             X_MB     ___           ___           ___           ___           ___             T_X_RB
+//├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┴───────────────────────────╯ ├──────┤
+    T_X_LH                                             ___           ___             T_X_MH   ___           ___                                                       T_X_RH
 //╰──────╯                                           ╰─────────────┴─────────────╯ ╰──────╯ ╰─────────────┴─────────────╯                                           ╰──────╯
 )
 
@@ -437,12 +455,28 @@ ZMK_LAYER(mouse,
 //╰──────╯                                           ╰─────────────┴─────────────╯ ╰──────╯ ╰─────────────┴─────────────╯                                           ╰──────╯
 )
 
+// Dota 2 variant of the game layer: Y/H/N replace Tab/Shift/Ctrl in the pinky
+// column (Dota's Shift can't be rebound), Shift moves to a thumb. Turned on by
+// the conditional layer above while GAME and DOTA_SEL are both on, so the
+// &tog GAME keys resume whichever game mode was selected last.
+ZMK_LAYER(dota,
+//╭──────╮ ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮ ╭──────╮ ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮ ╭──────╮
+    T_X_LT   &kp Y         ___           ___           ___           ___             T_X_MT   ___           ___           ___           ___           ___             T_X_RT
+//├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤
+    D_X_LM   &kp H         ___           ___           ___           ___             T_X_MM   ___           ___           ___           ___           ___             T_X_RM
+//├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤
+    D_X_LB   &kp N         ___           ___           ___           ___             X_MB     ___           ___           ___           ___           ___             T_X_RB
+//├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┴───────────────────────────╯ ├──────┤
+    T_X_LH                                             ___           ___             D_X_MH   ___           ___                                                       T_X_RH
+//╰──────╯                                           ╰─────────────┴─────────────╯ ╰──────╯ ╰─────────────┴─────────────╯                                           ╰──────╯
+)
+
 // held on the game layer's bottom small left-thumb key (F-keys, 6-0, extras)
 ZMK_LAYER(game_fn,
 //╭──────╮ ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮ ╭──────╮ ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮ ╭──────╮
     GF_X_LT  ___           &kp N6        &kp N7        &kp N8        &kp N9        GF_X_MT    ___           ___           ___           ___           ___             X_RT
 //├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤
-    GF_X_LM  ___           &kp F7        &kp F8        &kp F9        &kp F10       GF_X_MM    ___           ___           ___           ___           ___             X_RM
+    GF_X_LM  &tog DOTA_SEL &kp F7       &kp F8        &kp F9        &kp F10       GF_X_MM    ___           ___           ___           ___           ___             X_RM
 //├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤ ├──────┤
     GF_X_LB  ___           &kp F12       &kp GRAVE     &kp MINUS     &kp EQUAL       X_MB     ___           ___           ___           ___           ___             X_RB
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤ ├──────┤ ├─────────────┼─────────────┼─────────────┴───────────────────────────╯ ├──────┤

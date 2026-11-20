@@ -63,6 +63,27 @@
 #define GF_X_MH &kp BSPC    ___
 #define GF_X_RH ___         ___
 
+/* all-transparent extra keys (dota and dota_sel layers) */
+#define T_X_LT  ___ ___ ___ ___ ___ ___ ___     ___ ___ ___ ___ ___ ___ ___ \
+                ___
+#define T_X_MT  ___ ___
+#define T_X_RT  ___
+#define T_X_LM  ___
+#define T_X_MM  ___ ___
+#define T_X_RM  ___
+#define T_X_LB  ___
+#define T_X_RB  ___
+#define T_X_LH  ___ ___ ___ ___ ___     ___ ___ ___ ___ ___ \
+                ___ ___            ___ ___
+#define T_X_MH  ___ ___
+#define T_X_RH  ___ ___
+
+/* dota layer (on top of game while dota_sel is on). Nothing valuable goes on
+ * the hard-to-reach bottom-left keys (54 and 55, below LB5/LB4). */
+#define D_X_LM  &kp TAB              // was H, which moves into the main block
+#define D_X_LB  &kp LCTRL            // was B
+#define D_X_MH  &kp LSHFT   ___      // small left thumb key (was M): queue modifier
+
 /* activate bluetooth */
 #define CONFIG_WIRELESS 1
 
