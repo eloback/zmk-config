@@ -43,13 +43,13 @@
 
 #define G_X_LB  &kp B
 
-#define G_X_LH  &kp I     &kp LGUI &kp RET &kp LEFT &kp RIGHT     &kp UP &kp DOWN &none &none &none \
+#define G_X_LH  &kp I     &none    &kp RET &kp LEFT &kp RIGHT     &kp UP &kp DOWN &none &none &none \
                 &swapper     &tog GAME            &kp RGUI  &kp RCTRL
 #define G_X_MH  &kp M       &kp PG_UP
 #define G_X_RH  &mo GAME_FN  &kp PG_DN
 
 /* game_fn layer (held from the game layer) */
-#define GF_X_LT ___ &kp F6 &kp F1 &kp F2 &kp F3 &kp F4 &kp F5     ___ ___ ___ ___ ___ ___ ___ \
+#define GF_X_LT &tog DOTA_SEL &kp F6 &kp F1 &kp F2 &kp F3 &kp F4 &kp F5     ___ ___ ___ ___ ___ ___ ___ \
                 ___
 #define GF_X_MT &kp N0 ___
 
@@ -80,6 +80,8 @@
 
 /* dota layer (on top of game while dota_sel is on). Nothing valuable goes on
  * the hard-to-reach bottom-left keys (54 and 55, below LB5/LB4). */
+#define D_X_LT  ___ ___ ___ ___ ___ ___ ___     ___ ___ ___ ___ ___ ___ ___ \
+                &kp F1               // hero select (Esc stays on the number row)
 #define D_X_LM  &kp TAB              // was H, which moves into the main block
 #define D_X_LB  &kp LCTRL            // was B
 #define D_X_MH  &kp LSHFT   ___      // small left thumb key (was M): queue modifier

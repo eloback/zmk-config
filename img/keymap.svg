@@ -2172,8 +2172,8 @@ use.hold, use.shifted { fill: var(--sub); }
 <rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key"/>
 <text x="0" y="1" class="key tap">I</text>
 </g>
-<g transform="translate(105, 285)" class="key trans keypos-55">
-<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+<g transform="translate(105, 285)" class="key keypos-55">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key"/>
 </g>
 <g transform="translate(165, 270)" class="key keypos-56">
 <rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key"/>
@@ -2560,8 +2560,9 @@ use.hold, use.shifted { fill: var(--sub); }
 <g transform="translate(1042, 45)" class="key trans keypos-13">
 <rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key trans"/>
 </g>
-<g transform="translate(38, 105)" class="key trans keypos-14">
-<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key trans"/>
+<g transform="translate(38, 105)" class="key keypos-14">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key"/>
+<text x="0" y="1" class="key tap">F1</text>
 </g>
 <g transform="translate(105, 105)" class="key keypos-15">
 <rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key"/>
@@ -2757,8 +2758,11 @@ use.hold, use.shifted { fill: var(--sub); }
 <g transform="translate(16, 5122)" class="layer-Game Fn">
 <text x="0" y="22" class="label" id="Game-Fn">Game Fn</text>
 <g transform="translate(0, 44)">
-<g transform="translate(38, 45)" class="key trans keypos-0">
-<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key trans"/>
+<g transform="translate(38, 45)" class="key act-t-dota keypos-0">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key act-t-dota"/>
+<a href="#Dota">
+<text x="0" y="1" class="key act-t-dota tap layer-activator">Dota</text>
+</a><text x="0" y="-25" class="key act-t-dota shifted">mode</text>
 </g>
 <g transform="translate(105, 45)" class="key keypos-1">
 <rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key"/>
@@ -2855,11 +2859,8 @@ use.hold, use.shifted { fill: var(--sub); }
 <g transform="translate(38, 165)" class="key trans keypos-28">
 <rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key trans"/>
 </g>
-<g transform="translate(105, 165)" class="key act-t-dota keypos-29">
-<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key act-t-dota"/>
-<a href="#Dota">
-<text x="0" y="1" class="key act-t-dota tap layer-activator">Dota</text>
-</a><text x="0" y="-25" class="key act-t-dota shifted">mode</text>
+<g transform="translate(105, 165)" class="key trans keypos-29">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
 </g>
 <g transform="translate(165, 150)" class="key keypos-30">
 <rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key"/>

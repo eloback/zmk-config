@@ -655,7 +655,7 @@ layers:
   - t: /
   - type: trans
   - t: I
-  - type: trans
+  - t: ''
   - t: Enter
   - type: trans
   - type: trans
@@ -769,7 +769,7 @@ layers:
   - type: trans
   - type: trans
   - type: trans
-  - type: trans
+  - t: F1
   - t: Y
   - type: trans
   - type: trans
@@ -832,7 +832,9 @@ layers:
   - type: trans
   - type: trans
   Game Fn:
-  - type: trans
+  - t: Dota
+    s: mode
+    type: act-t-dota
   - t: F6
   - t: F1
   - t: F2
@@ -861,9 +863,7 @@ layers:
   - type: trans
   - type: trans
   - type: trans
-  - t: Dota
-    s: mode
-    type: act-t-dota
+  - type: trans
   - t: F7
   - t: F8
   - t: F9
