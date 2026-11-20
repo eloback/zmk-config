@@ -18,6 +18,7 @@ the nav/fn/num/sys legends in its corners, the way urob draws his keymap).
   layer-specific combos on their layer
 """
 
+import json
 import re
 import sys
 from pathlib import Path
@@ -138,6 +139,36 @@ def main() -> None:
         if twin["k"].get("s") in (None, legend):
             twin["k"]["s"] = legend
             combos.remove(combo)
+
+    # On the Combos panel, mark the keys combos use with their base letter
+    # (top left, where no combo box sits), so "Esc" reads as W + E.
+    def letter(i: int) -> str:
+        t = layers["base"][i].get("t", "")
+        return t if t and not t.startswith("$$") else ""
+
+    used = {i for c in combos if c["l"] == [COMBOS] for i in c["p"]}
+    layers[COMBOS] = [
+        {"tl": letter(i), "type": "combo-key"} if i in used and letter(i) else {"type": "trans"}
+        for i in range(len(layers[COMBOS]))
+    ]
+
+    # Combo list for the viewer: what each combo does and which keys make it.
+    (out / "combos.json").write_text(
+        json.dumps(
+            [
+                {
+                    "layer": c["l"][0],
+                    "p": c["p"],
+                    "t": c["k"].get("t", ""),
+                    "h": c["k"].get("h", ""),
+                    "s": c["k"].get("s", ""),
+                    "keys": [letter(i) or f"#{i}" for i in c["p"]],
+                }
+                for c in combos
+            ],
+            ensure_ascii=False,
+        )
+    )
 
     full = {
         "layout": km["layout"],

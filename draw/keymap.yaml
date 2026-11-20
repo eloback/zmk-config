@@ -911,82 +911,108 @@ layers:
   - type: held on-game-fn
   - type: trans
   Combos:
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
-  - t: ''
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - tl: W
+    type: combo-key
+  - tl: E
+    type: combo-key
+  - tl: R
+    type: combo-key
+  - tl: T
+    type: combo-key
+  - type: trans
+  - type: trans
+  - tl: Y
+    type: combo-key
+  - tl: U
+    type: combo-key
+  - tl: I
+    type: combo-key
+  - tl: O
+    type: combo-key
+  - type: trans
+  - type: trans
+  - type: trans
+  - tl: A
+    type: combo-key
+  - tl: S
+    type: combo-key
+  - tl: D
+    type: combo-key
+  - tl: F
+    type: combo-key
+  - tl: G
+    type: combo-key
+  - type: trans
+  - type: trans
+  - tl: H
+    type: combo-key
+  - tl: J
+    type: combo-key
+  - tl: K
+    type: combo-key
+  - tl: L
+    type: combo-key
+  - tl: ''''
+    type: combo-key
+  - type: trans
+  - type: trans
+  - type: trans
+  - tl: X
+    type: combo-key
+  - tl: C
+    type: combo-key
+  - tl: V
+    type: combo-key
+  - tl: B
+    type: combo-key
+  - tl: N
+    type: combo-key
+  - tl: M
+    type: combo-key
+  - tl: ','
+    type: combo-key
+  - tl: .
+    type: combo-key
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
 combos:
 - p:
   - 16
@@ -1034,14 +1060,6 @@ combos:
     t: Space
   l:
   - Combos
-- p:
-  - 29
-  - 32
-  k:
-    t: tmux
-  l:
-  - Combos
-  a: left
 - p:
   - 29
   - 30

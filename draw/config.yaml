@@ -95,6 +95,10 @@ draw_config:
     rect.combo, rect.combo-separate { fill: var(--key); stroke: var(--dendron); stroke-width: 1; }
     rect.trans { fill: var(--ghost); stroke: none; }
     .layer-Combos rect.key { fill: var(--ghost); }
+    /* keys combos are made of: a plain key with its base letter top left */
+    .layer-Combos rect.combo-key { fill: var(--key); }
+    .layer-Combos text.tl { fill: var(--sub); font-size: 11px; font-weight: 600; }
+    .layer-Combos rect.combo { fill: var(--misc-soft); stroke: var(--misc); }
     path.combo { stroke: var(--dendron); stroke-width: 1.5; stroke-dasharray: 2 3; fill: none; }
 
     /* the key held to reach a layer, tinted in that layer's color */
@@ -185,7 +189,6 @@ parse_config:
   zmk_combos:
     combo_mouse: { align: top }
     combo_ldr: { align: top }
-    combo_tmux: { align: left }
     combo_cut: { align: bottom }
 
   zmk_keycode_map:

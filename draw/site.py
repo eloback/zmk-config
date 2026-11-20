@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the interactive keymap viewer (see draw.sh).
 
-Usage: site.py KEYMAP_YAML LAYERS_TXT SITE_DIR
+Usage: site.py COMBOS_JSON LAYERS_TXT SITE_DIR
 
 Reads SITE_DIR/layers/{overview,0,1,...}.svg (one keymap-drawer SVG per
 layer) and writes SITE_DIR/index.html, a single self-contained page:
@@ -10,6 +10,8 @@ layer) and writes SITE_DIR/index.html, a single self-contained page:
 - layer keys are links: click "Nav" on Space to open the nav layer
 - search ("/"): highlights matching keys and counts matches per layer, so
   "where is the $ key?" is one keystroke away
+- combos: hovering one highlights the keys that make it, and the Combos and
+  Overview tabs list every combo with its keys (COMBOS_JSON, from process.py)
 """
 
 import html
@@ -49,7 +51,7 @@ CROP = 28  # draw_config.outer_pad_h minus a margin
 
 
 def main() -> None:
-    _keymap, layers_txt, site = sys.argv[1], Path(sys.argv[2]), Path(sys.argv[3])
+    combos_json, layers_txt, site = Path(sys.argv[1]), Path(sys.argv[2]), Path(sys.argv[3])
     names = [l for l in layers_txt.read_text().splitlines() if l]
     tabs = [("Overview", "overview")] + [(n, str(i)) for i, n in enumerate(names)]
 
@@ -68,6 +70,7 @@ def main() -> None:
 
     page = TEMPLATE.replace("{{TABS}}", "\n      ".join(buttons)).replace("{{PANELS}}", "\n    ".join(panels))
     page = page.replace("{{NAMES}}", json.dumps([n for n, _ in tabs]))
+    page = page.replace("{{COMBOS}}", combos_json.read_text())
     (site / "index.html").write_text(page)
 
 
@@ -129,7 +132,7 @@ TEMPLATE = """<!doctype html>
   .stage svg { display: block; width: 100%; min-width: 720px; height: auto; }
   .stage a { cursor: pointer; }
   .stage a:hover text { text-decoration: underline; }
-  section.searching g.key, section.searching g.combo { opacity: 0.25; transition: opacity 0.15s; }
+  section.searching g.key, section.searching g.combo { opacity: 0.25; }
   section.searching g.hit { opacity: 1; }
   g.hit > rect { stroke: var(--hit) !important; stroke-width: 3 !important; }
   .legend {
@@ -138,6 +141,31 @@ TEMPLATE = """<!doctype html>
   }
   .legend b { color: var(--text); }
   .legend .c { font-weight: 700; }
+  /* combo hover: light up the keys that make the combo */
+  section.combo-focus g.combo, section.combo-focus g.key { opacity: 0.3; }
+  section.combo-focus g.combo.on, section.combo-focus g.key.src { opacity: 1; }
+  g.key.src > rect { stroke: var(--accent) !important; stroke-width: 3 !important; }
+  g.combo.on > rect { stroke: var(--accent) !important; stroke-width: 2 !important; }
+  g.combo { cursor: default; }
+  .combos { margin-top: 20px; }
+  .combos h2 { font-size: 17px; margin: 0 0 2px; }
+  .combos p { margin: 0 0 10px; color: var(--sub); font-size: 14px; }
+  #combo-list {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px;
+  }
+  #combo-list li {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface);
+  }
+  #combo-list li.on { border-color: var(--accent); }
+  #combo-list .out { font-weight: 600; }
+  #combo-list .out small { color: var(--sub); font-weight: 400; margin-left: 4px; }
+  #combo-list .keys { display: flex; gap: 3px; align-items: center; color: var(--sub); font-size: 12px; }
+  #combo-list kbd {
+    font: 600 12px/1 ui-monospace, monospace; padding: 3px 5px; border-radius: 4px;
+    border: 1px solid var(--line); background: var(--bg); color: var(--text);
+  }
   .status { min-height: 1.5em; color: var(--sub); font-size: 14px; margin: 0 0 8px; }
 </style>
 </head>
@@ -162,6 +190,12 @@ TEMPLATE = """<!doctype html>
   <div class="stage">
     {{PANELS}}
   </div>
+
+  <section class="combos" id="combo-section" hidden>
+    <h2>Combos</h2>
+    <p>Press the keys together. Hover a combo to see its keys on the board.</p>
+    <ul id="combo-list"></ul>
+  </section>
 
   <div class="legend">
     <div><b>Center</b> tap &middot; <b>bottom</b> hold &middot; <b>top</b> shifted</div>
@@ -209,7 +243,7 @@ for (const a of document.querySelectorAll(".stage a")) {
 function legends(g) {
   return [...g.querySelectorAll("text, tspan")].map(t => t.textContent.trim().toLowerCase()).filter(Boolean);
 }
-const index = panels.map(p => [...p.querySelectorAll("g.key, g.combo")].map(g => [g, legends(g)]));
+const index = panels.map(p => [...p.querySelectorAll("g.key:not(.combo-key), g.combo")].map(g => [g, legends(g)]));
 
 function matches(words, term) {
   return words.some(w => w === term || (term.length > 1 && w.split(/[\\s+]+/).some(p => p.startsWith(term))));
@@ -231,6 +265,7 @@ function search() {
     return n;
   });
   describe();
+  filterCombos();
 }
 
 function describe() {
@@ -240,6 +275,77 @@ function describe() {
   status.textContent = where.length
     ? `"${term}" is on ${where.join(", ")}.` + (counts[current()] ? "" : " Enter jumps there.")
     : `No key matches "${term}".`;
+}
+
+// Combos. keymap-drawer numbers each layer's combos (combopos-N) in the
+// order they appear in keymap.yaml, which COMBOS keeps.
+const COMBOS = {{COMBOS}};
+const comboLayer = s => (s === "overview" ? "combos" : s);
+const combosOf = s => COMBOS.filter(c => slug(c.layer) === comboLayer(s));
+const describeCombo = c =>
+  `${c.t} = ${c.keys.join(" + ")}` + (c.h ? ` (hold: ${c.h})` : "") + (c.s ? ` (shift / nav: ${c.s})` : "");
+
+function focusCombo(panel, c, on) {
+  panel.classList.toggle("combo-focus", on);
+  const list = combosOf(panel.dataset.layer);
+  const i = list.indexOf(c);
+  panel.querySelector(`g.combopos-${i}`)?.classList.toggle("on", on);
+  for (const p of c.p) panel.querySelector(`g.key.keypos-${p}`)?.classList.toggle("src", on);
+  listItems.get(c)?.classList.toggle("on", on);
+  if (on) status.textContent = describeCombo(c); else describe();
+}
+
+for (const panel of panels) {
+  const list = combosOf(panel.dataset.layer);
+  for (const g of panel.querySelectorAll("g.combo")) {
+    const c = list[Number((g.getAttribute("class").match(/combopos-(\\d+)/) || [])[1])];
+    if (!c) continue;
+    g.addEventListener("mouseenter", () => focusCombo(panel, c, true));
+    g.addEventListener("mouseleave", () => focusCombo(panel, c, false));
+    g.addEventListener("click", () => focusCombo(panel, c, !g.classList.contains("on")));
+  }
+}
+
+const listItems = new Map();
+const comboSection = document.getElementById("combo-section");
+const comboList = document.getElementById("combo-list");
+for (const c of combosOf("combos")) {
+  const li = document.createElement("li");
+  const out = document.createElement("span");
+  out.className = "out";
+  out.textContent = c.t;
+  if (c.h) {
+    const small = document.createElement("small");
+    small.textContent = "hold " + c.h;
+    out.append(small);
+  }
+  const keys = document.createElement("span");
+  keys.className = "keys";
+  c.keys.forEach((k, i) => {
+    if (i) keys.append("+");
+    const kbd = document.createElement("kbd");
+    kbd.textContent = k;
+    keys.append(kbd);
+  });
+  li.append(out, keys);
+  li.dataset.words = [c.t, c.h, c.s].join(" ").toLowerCase();
+  const panel = () => panels[current()];
+  li.addEventListener("mouseenter", () => focusCombo(panel(), c, true));
+  li.addEventListener("mouseleave", () => focusCombo(panel(), c, false));
+  comboList.append(li);
+  listItems.set(c, li);
+}
+
+// Show the list on the tabs that draw these combos; search filters it.
+const baseShow = show;
+show = (layer, push = true) => {
+  baseShow(layer, push);
+  comboSection.hidden = !["combos", "overview"].includes(tabs[current()].dataset.layer);
+};
+function filterCombos() {
+  const term = q.value.trim().toLowerCase();
+  for (const li of listItems.values())
+    li.hidden = term !== "" && !matches(li.dataset.words.split(" ").filter(Boolean), term);
 }
 
 q.addEventListener("input", search);

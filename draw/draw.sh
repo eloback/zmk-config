@@ -50,7 +50,7 @@ while IFS= read -r layer; do
     i=$((i + 1))
 done <"$tmp/layers.txt"
 cp img/overview.svg site/layers/overview.svg
-python3 draw/site.py "$tmp/keymap.yaml" "$tmp/layers.txt" site
+python3 draw/site.py "$tmp/combos.json" "$tmp/layers.txt" site
 
 cp "$tmp/keymap.yaml" draw/keymap.yaml
 echo "wrote img/overview.svg, img/keymap.svg, draw/keymap.yaml and site/"
