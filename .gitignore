@@ -7,3 +7,6 @@
 # nix build output
 result
 result-*
+
+# interactive keymap viewer (draw/draw.sh)
+site

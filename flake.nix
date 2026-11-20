@@ -55,13 +55,14 @@
 
       flash = zmk-nix.packages.${system}.flash.override {inherit firmware;};
 
-      # Redraw img/keymap.svg with keymap-drawer (see draw/draw.sh).
+      # Redraw img/*.svg and the site/ viewer with keymap-drawer (see draw/draw.sh).
       draw = let
         pkgs = nixpkgs.legacyPackages.${system};
+        python = pkgs.python3.withPackages (ps: [ps.pyyaml]);
       in
         pkgs.writeShellApplication {
           name = "draw";
-          runtimeInputs = with pkgs; [keymap-drawer yq-go git gnused gnugrep coreutils];
+          runtimeInputs = with pkgs; [keymap-drawer python git gnused gnugrep coreutils];
           text = builtins.readFile ./draw/draw.sh;
         };
     });
