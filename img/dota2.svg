@@ -275,15 +275,15 @@ use.hold, use.shifted { fill: var(--sub); }
 <text x="0" y="1" class="key grp-ability tap">Ult</text>
 <text x="0" y="-25" class="key grp-ability shifted">D</text>
 </g>
-<g transform="translate(345, 150)" class="key grp-unit keypos-33">
-<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
-<text x="0" y="1" class="key grp-unit tap">Attack</text>
-<text x="0" y="-25" class="key grp-unit shifted">F</text>
+<g transform="translate(345, 150)" class="key grp-item keypos-33">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-item"/>
+<text x="0" y="1" class="key grp-item tap">It6</text>
+<text x="0" y="-25" class="key grp-item shifted">F</text>
 </g>
-<g transform="translate(405, 150)" class="key grp-chat keypos-34">
-<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-chat"/>
-<text x="0" y="1" class="key grp-chat tap">Wheel</text>
-<text x="0" y="-25" class="key grp-chat shifted">G</text>
+<g transform="translate(405, 150)" class="key grp-ability keypos-34">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-ability"/>
+<text x="0" y="1" class="key grp-ability tap">Learn</text>
+<text x="0" y="-25" class="key grp-ability shifted">G</text>
 </g>
 <g transform="translate(675, 150)" class="key keypos-35">
 <rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key"/>
@@ -326,20 +326,20 @@ use.hold, use.shifted { fill: var(--sub); }
 <text x="0" y="1" class="key mod tap">Ctrl</text>
 <text x="0" y="-25" class="key mod shifted"><tspan style="font-size: 88%">modifier</tspan></text>
 </g>
-<g transform="translate(105, 225)" class="key grp-ability keypos-43">
-<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-ability"/>
-<text x="0" y="1" class="key grp-ability tap">Learn</text>
-<text x="0" y="-25" class="key grp-ability shifted">N</text>
+<g transform="translate(105, 225)" class="key grp-unit keypos-43">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Attack</text>
+<text x="0" y="-25" class="key grp-unit shifted">N</text>
 </g>
-<g transform="translate(165, 210)" class="key grp-item keypos-44">
-<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-item"/>
-<text x="0" y="1" class="key grp-item tap">It6</text>
-<text x="0" y="-25" class="key grp-item shifted">Z</text>
-</g>
-<g transform="translate(225, 210)" class="key grp-unit keypos-45">
+<g transform="translate(165, 210)" class="key grp-unit keypos-44">
 <rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
 <text x="0" y="1" class="key grp-unit tap">Stop</text>
-<text x="0" y="-25" class="key grp-unit shifted">X</text>
+<text x="0" y="-25" class="key grp-unit shifted">Z</text>
+</g>
+<g transform="translate(225, 210)" class="key grp-item keypos-45">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-item"/>
+<text x="0" y="1" class="key grp-item tap">Neutral</text>
+<text x="0" y="-25" class="key grp-item shifted">X</text>
 </g>
 <g transform="translate(285, 210)" class="key grp-ability keypos-46">
 <rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-ability"/>
@@ -351,10 +351,10 @@ use.hold, use.shifted { fill: var(--sub); }
 <text x="0" y="1" class="key grp-ability tap">Ab5</text>
 <text x="0" y="-25" class="key grp-ability shifted">V</text>
 </g>
-<g transform="translate(735, 210)" class="key grp-ability keypos-48">
-<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-ability"/>
-<text x="0" y="1" class="key grp-ability tap">Learn</text>
-<text x="0" y="-25" class="key grp-ability shifted">N</text>
+<g transform="translate(735, 210)" class="key grp-unit keypos-48">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Attack</text>
+<text x="0" y="-25" class="key grp-unit shifted">N</text>
 </g>
 <g transform="translate(795, 210)" class="key grp-unit keypos-49">
 <rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
@@ -399,10 +399,10 @@ use.hold, use.shifted { fill: var(--sub); }
 </text>
 <text x="0" y="-25" class="key grp-camera shifted">←</text>
 </g>
-<g transform="translate(285, 270)" class="key grp-item keypos-58">
-<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-item"/>
-<text x="0" y="1" class="key grp-item tap">Neutral</text>
-<text x="0" y="-25" class="key grp-item shifted">→</text>
+<g transform="translate(285, 270)" class="key grp-chat keypos-58">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-chat"/>
+<text x="0" y="1" class="key grp-chat tap">Wheel</text>
+<text x="0" y="-25" class="key grp-chat shifted">→</text>
 </g>
 <g transform="translate(795, 270)" class="key grp-camera keypos-59">
 <rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-camera"/>
@@ -469,10 +469,10 @@ use.hold, use.shifted { fill: var(--sub); }
 <text x="0" y="1" class="key grp-ability tap">Ab5</text>
 <text x="0" y="-55" class="key grp-ability shifted">V</text>
 </g>
-<g transform="translate(738, 371) rotate(-15.0)" class="key grp-ability keypos-73">
-<rect rx="7" ry="7" x="-28" y="-58" width="56" height="116" class="key grp-ability"/>
-<text x="0" y="1" class="key grp-ability tap">Learn</text>
-<text x="0" y="-55" class="key grp-ability shifted">N</text>
+<g transform="translate(738, 371) rotate(-15.0)" class="key grp-unit keypos-73">
+<rect rx="7" ry="7" x="-28" y="-58" width="56" height="116" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Attack</text>
+<text x="0" y="-55" class="key grp-unit shifted">N</text>
 </g>
 <g transform="translate(450, 431) rotate(15.0)" class="key act-h-game-fn keypos-74">
 <rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key act-h-game-fn"/>

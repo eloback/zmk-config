@@ -58,7 +58,7 @@
 		}
 		"ChatWheel"
 		{
-			"Key"		"G"
+			"Key"		"RIGHTARROW"
 		}
 		"HeroChatWheel"
 		{
@@ -66,12 +66,12 @@
 		}
 		"HeroAttack"
 		{
-			"Key"		"F"
+			"Key"		"N"
 			"Mode"		"0"
 		}
 		"HeroStop"
 		{
-			"Key"		"X"
+			"Key"		"Z"
 			"Mode"		"0"
 		}
 		"HeroSelect"
@@ -162,7 +162,7 @@
 		}
 		"LearnAbilities"
 		{
-			"Key"		"N"
+			"Key"		"G"
 			"Mode"		"0"
 		}
 		"LearnStats"
@@ -197,7 +197,7 @@
 		}
 		"Inventory6"
 		{
-			"Key"		"Z"
+			"Key"		"F"
 			"Mode"		"0"
 		}
 		"InventoryTP"
@@ -623,7 +623,7 @@
 		}
 		"Inventory6AutoCast"
 		{
-			"Key"		"z"
+			"Key"		"f"
 			"Modifier"		"ALT"
 			"Mode"		"-1"
 		}
@@ -651,12 +651,12 @@
 		}
 		"InventoryNeutral"
 		{
-			"Key"		"RIGHTARROW"
+			"Key"		"X"
 			"Mode"		"-1"
 		}
 		"InventoryNeutralAutoCast"
 		{
-			"Key"		"RIGHTARROW"
+			"Key"		"x"
 			"Modifier"		"ALT"
 			"Mode"		"-1"
 		}
