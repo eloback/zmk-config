@@ -103,6 +103,18 @@ rect.held { fill: var(--misc-soft); stroke: var(--misc); stroke-width: 1.5; }
 .on-mouse rect.held { fill: var(--mouse-soft); stroke: var(--mouse); }
 .on-game-fn rect.held { fill: var(--game-soft); stroke: var(--game); }
 
+/* game pages (draw/game.py): keys colored by what the bind does */
+rect.grp-ability { fill: var(--nav-soft); stroke: var(--nav); }
+rect.grp-item { fill: var(--game-soft); stroke: var(--game); }
+rect.grp-unit { fill: var(--sys-soft); stroke: var(--sys); }
+rect.grp-camera { fill: var(--mouse-soft); stroke: var(--mouse); }
+rect.grp-shop { fill: var(--fn-soft); stroke: var(--fn); }
+rect.grp-chat { fill: var(--num-soft); stroke: var(--num); }
+rect.grp-system, rect.grp-other { fill: var(--misc-soft); stroke: var(--misc); }
+rect.mod { fill: var(--ghost); stroke: var(--dendron); stroke-dasharray: 3 2; }
+rect.unbound { fill: var(--ghost); stroke: none; }
+g.unbound text { fill: var(--sub); }
+
 /* keys that switch layers: legend in the target layer's color. process.py
    tags them act-t-LAYER (tap switches) or act-h-LAYER (hold switches). */
 g[class*="act-t-"] text.tap, g[class*="act-h-"] text.hold { fill: var(--misc); font-weight: 700; }

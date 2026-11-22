@@ -1,7 +1,7 @@
 name: Draw keymap
-# Redraws img/*.svg (keymap-drawer, see draw/draw.sh) whenever the keymap or
-# the draw setup changes, commits them, and publishes the interactive viewer
-# (site/) to GitHub Pages.
+# Redraws img/*.svg (keymap-drawer, see draw/draw.sh) whenever the keymap, a
+# game's binds (games/) or the draw setup changes, commits them, and publishes
+# the interactive viewer (site/) to GitHub Pages.
 #
 # Pages must be set to deploy from GitHub Actions once:
 # Settings > Pages > Build and deployment > Source: GitHub Actions.
@@ -11,6 +11,7 @@ on:
     branches: [main]
     paths:
       - config/**
+      - games/**
       - draw/config.yaml
       - draw/*.sh
       - draw/*.py
@@ -36,7 +37,7 @@ jobs:
 
       - name: Commit the drawings if they changed
         run: |
-          git add img/keymap.svg img/overview.svg draw/keymap.yaml
+          git add img/*.svg draw/keymap.yaml
           if git diff --cached --quiet; then
             echo "keymap drawing is up to date"
             exit 0

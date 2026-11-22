@@ -1,0 +1,98 @@
+# Display labels for the Dota 2 page (draw/game.py). Display only: the binds
+# themselves live in dotakeys_personal.lst, a verbatim copy of the game's file.
+#
+#   Action: { t: short key label, name: what it does, group: color }
+#
+# Groups: ability, item, unit, camera, shop, chat, system.
+# Actions missing here still show up, under their raw name, so a game update
+# that adds an action never breaks the page. Add a label when one appears.
+
+title: Dota 2
+binds: dotakeys_personal.lst
+# Keyboard layers active in Dota mode, top first (config/base.keymap), and the
+# layer held for F-keys. The page draws what each key types in that mode.
+layers: [dota, game]
+fn: game_fn
+
+groups:
+  ability: Abilities
+  item: Items
+  unit: Units
+  camera: Camera
+  shop: Courier & shop
+  chat: Chat & pings
+  system: System
+
+actions:
+  AbilityPrimary1:   { t: Ab1, name: Ability 1, group: ability }
+  AbilityPrimary2:   { t: Ab2, name: Ability 2, group: ability }
+  AbilityPrimary3:   { t: Ab3, name: Ability 3, group: ability }
+  AbilitySecondary1: { t: Ab4, name: Ability 4, group: ability }
+  AbilitySecondary2: { t: Ab5, name: Ability 5, group: ability }
+  AbilityUltimate:   { t: Ult, name: Ultimate, group: ability }
+  LearnAbilities:    { t: Learn, name: Learn abilities, group: ability }
+  LearnStats:        { t: Stats, name: Learn stats, group: ability }
+
+  Inventory1:        { t: It1, name: Item 1, group: item }
+  Inventory2:        { t: It2, name: Item 2, group: item }
+  Inventory3:        { t: It3, name: Item 3, group: item }
+  Inventory4:        { t: It4, name: Item 4, group: item }
+  Inventory5:        { t: It5, name: Item 5, group: item }
+  Inventory6:        { t: It6, name: Item 6, group: item }
+  InventoryTP:       { t: TP, name: Teleport scroll, group: item }
+  InventoryNeutral:  { t: Neutral, name: Neutral item, group: item }
+
+  HeroAttack:        { t: Attack, name: Attack move, group: unit }
+  HeroStop:          { t: Stop, name: Stop, group: unit }
+  HeroMove:          { t: Move, name: Move, group: unit }
+  HeroSelect:        { t: Hero, name: Select hero (double-tap centers), group: unit }
+  SelectAll:         { t: All, name: Select all units, group: unit }
+  SelectAllOthers:   { t: Others, name: Select all other units, group: unit }
+  ControlGroupCycle: { t: Cycle, name: Cycle selected units, group: unit }
+  ControlGroup1:     { t: Grp1, name: Control group 1, group: unit }
+  ControlGroup2:     { t: Grp2, name: Control group 2, group: unit }
+  ControlGroup3:     { t: Grp3, name: Control group 3, group: unit }
+  ControlGroup4:     { t: Grp4, name: Control group 4, group: unit }
+  ControlGroup5:     { t: Grp5, name: Control group 5, group: unit }
+  ControlGroup6:     { t: Grp6, name: Control group 6, group: unit }
+  ControlGroup7:     { t: Grp7, name: Control group 7, group: unit }
+  ControlGroup8:     { t: Grp8, name: Control group 8, group: unit }
+  ControlGroup9:     { t: Grp9, name: Control group 9, group: unit }
+  ControlGroup10:    { t: Grp10, name: Control group 10, group: unit }
+
+  CameraUp:          { t: Cam ↑, name: Camera up, group: camera }
+  CameraDown:        { t: Cam ↓, name: Camera down, group: camera }
+  CameraLeft:        { t: Cam ←, name: Camera left, group: camera }
+  CameraRight:       { t: Cam →, name: Camera right, group: camera }
+  CameraGrip:        { t: Grip, name: Camera grip, group: camera }
+  CameraZoomIn:      { t: Zoom +, name: Zoom in, group: camera }
+  CameraZoomOut:     { t: Zoom −, name: Zoom out, group: camera }
+  RecentEvent:       { t: Event, name: Jump to recent event, group: camera }
+
+  CourierSelect:     { t: Courier, name: Select courier, group: shop }
+  CourierDeliver:    { t: Deliver, name: Courier deliver items, group: shop }
+  ScoutSelect:       { t: Scout, name: Select scout, group: shop }
+  ShopToggle:        { t: Shop, name: Open shop, group: shop }
+  PurchaseQuickbuy:  { t: Quickbuy, name: Buy quickbuy, group: shop }
+  PurchaseSticky:    { t: Sticky, name: Buy sticky item, group: shop }
+
+  ChatTeam:          { t: Chat, name: Team chat, group: chat }
+  ChatTeam2:         { t: Chat, name: Team chat, group: chat }
+  ChatGlobal:        { t: All chat, name: All chat, group: chat }
+  ChatGlobal2:       { t: All chat, name: All chat, group: chat }
+  ChatWheel:         { t: Wheel, name: Chat wheel, group: chat }
+  HeroChatWheel:     { t: Hero wheel, name: Hero chat wheel, group: chat }
+  ActivateGlyph:     { t: Glyph, name: Glyph of fortification, group: chat }
+  ActivateRadar:     { t: Scan, name: Scan, group: chat }
+
+  ScoreboardToggle:  { t: Score, name: Scoreboard, group: system }
+  Pause:             { t: Pause, name: Pause, group: system }
+  Escape:            { t: Esc, name: Menu / cancel, group: system }
+  Console:           { t: Console, name: Console, group: system }
+  ScreenshotSettings: { t: Shot, name: Screenshot, group: system }
+  CombatLogToggle:   { t: Log, name: Combat log, group: system }
+
+# Binds that only work inside a menu (shop, talent tree, spectating). They are
+# listed on the page but not drawn on the board, where they would cover the
+# gameplay binds sharing their keys.
+context: [ShopTab, ShopSlot, Spectator, Talent, NeutralItemSelect]

@@ -46,11 +46,15 @@ The [full drawing](img/keymap.svg) has every layer. On a layer, a blank key
 does the same as on the layer below, and the colored key is the one held to
 get there.
 
+Game binds, drawn on the keyboard's game mode, live in [games/](games/):
+[Dota 2](games/dota2/) ([viewer tab](https://eloback.github.io/zmk-config/#dota-2)).
+
 The drawings are made with
 [keymap-drawer](https://github.com/caksoylar/keymap-drawer) from
 `config/adv360pro.keymap`. CI redraws and commits them on every keymap change
 and publishes the interactive page (`.github/workflows/draw.yml`). To redraw
-locally, run `nix run .#draw` and open `site/index.html`. Labels and colors
+locally, run `nix run .#draw` (or `draw` in the devshell) and open
+`site/index.html`. Labels and colors
 live in `draw/config.yaml`, layer names and clean-up in `draw/process.py`.
 
 ## Timeless homerow mods

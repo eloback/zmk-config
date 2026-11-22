@@ -1,0 +1,767 @@
+<svg width="1112" height="1068" viewBox="0 0 1112 1068" class="keymap" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style>svg.keymap {
+  --bg: #e6e9ef;
+  --key: #fbfbfd;
+  --key-edge: #ccd0da;
+  --text: #4c4f69;
+  --sub: #7c7f93;
+  --ghost: #dce0e8;
+  --dendron: #8c8fa1;
+  --nav: #1e66f5;   --nav-soft: #d3e0fd;
+  --fn: #8839ef;    --fn-soft: #e6d7fc;
+  --num: #e64553;   --num-soft: #f9d6d9;
+  --sys: #40a02b;   --sys-soft: #d5ebd0;
+  --game: #df8e1d;  --game-soft: #f7e3c4;
+  --mouse: #179299; --mouse-soft: #c9e7e8;
+  --misc: #7287fd;  --misc-soft: #dce1fe;
+
+  fill: var(--text);
+  background-color: var(--bg);
+  font-family: Inter, "SF Pro Text", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 13px;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-color-scheme: dark) {
+  svg.keymap {
+    --bg: #11111b;
+    --key: #1e1e2e;
+    --key-edge: #313244;
+    --text: #cdd6f4;
+    --sub: #9399b2;
+    --ghost: #181825;
+    --dendron: #6c7086;
+    --nav: #89b4fa;   --nav-soft: #2a3550;
+    --fn: #cba6f7;    --fn-soft: #3a2f4f;
+    --num: #f38ba8;   --num-soft: #4a2a36;
+    --sys: #a6e3a1;   --sys-soft: #2c4030;
+    --game: #fab387;  --game-soft: #4a3628;
+    --mouse: #94e2d5; --mouse-soft: #24403d;
+    --misc: #b4befe;  --misc-soft: #33364f;
+  }
+}
+
+text { text-anchor: middle; dominant-baseline: middle; }
+text.tap { font-weight: 600; }
+text.hold, text.shifted { font-size: 9.5px; fill: var(--sub); font-weight: 500; }
+text.hold { dominant-baseline: auto; }
+text.shifted { dominant-baseline: hanging; }
+text.tl, text.tr, text.bl, text.br { font-size: 9.5px; font-weight: 700; }
+text.tl, text.bl { text-anchor: start; }
+text.tr, text.br { text-anchor: end; }
+text.tl, text.tr { dominant-baseline: hanging; }
+text.bl, text.br { dominant-baseline: auto; }
+text.combo { font-size: 9.5px; font-weight: 600; }
+text.combo.hold, text.combo.shifted { font-size: 7px; }
+text.layer-activator { text-decoration: none; }
+
+text.label {
+  font-size: 17px;
+  font-weight: 700;
+  text-anchor: start;
+  letter-spacing: 0.02em;
+  fill: var(--text);
+}
+
+rect.key { fill: var(--key); stroke: var(--key-edge); stroke-width: 1; }
+rect.combo, rect.combo-separate { fill: var(--key); stroke: var(--dendron); stroke-width: 1; }
+rect.trans { fill: var(--ghost); stroke: none; }
+.layer-Combos rect.key { fill: var(--ghost); }
+/* keys combos are made of: a plain key with its base letter top left */
+.layer-Combos rect.combo-key { fill: var(--key); }
+.layer-Combos text.tl { fill: var(--sub); font-size: 11px; font-weight: 600; }
+.layer-Combos rect.combo { fill: var(--misc-soft); stroke: var(--misc); }
+path.combo { stroke: var(--dendron); stroke-width: 1.5; stroke-dasharray: 2 3; fill: none; }
+
+/* the key held to reach a layer, tinted in that layer's color */
+rect.held { fill: var(--misc-soft); stroke: var(--misc); stroke-width: 1.5; }
+.on-nav rect.held { fill: var(--nav-soft); stroke: var(--nav); }
+.on-fn rect.held { fill: var(--fn-soft); stroke: var(--fn); }
+.on-num rect.held { fill: var(--num-soft); stroke: var(--num); }
+.on-sys rect.held { fill: var(--sys-soft); stroke: var(--sys); }
+.on-mouse rect.held { fill: var(--mouse-soft); stroke: var(--mouse); }
+.on-game-fn rect.held { fill: var(--game-soft); stroke: var(--game); }
+
+/* game pages (draw/game.py): keys colored by what the bind does */
+rect.grp-ability { fill: var(--nav-soft); stroke: var(--nav); }
+rect.grp-item { fill: var(--game-soft); stroke: var(--game); }
+rect.grp-unit { fill: var(--sys-soft); stroke: var(--sys); }
+rect.grp-camera { fill: var(--mouse-soft); stroke: var(--mouse); }
+rect.grp-shop { fill: var(--fn-soft); stroke: var(--fn); }
+rect.grp-chat { fill: var(--num-soft); stroke: var(--num); }
+rect.grp-system, rect.grp-other { fill: var(--misc-soft); stroke: var(--misc); }
+rect.mod { fill: var(--ghost); stroke: var(--dendron); stroke-dasharray: 3 2; }
+rect.unbound { fill: var(--ghost); stroke: none; }
+g.unbound text { fill: var(--sub); }
+
+/* keys that switch layers: legend in the target layer's color. process.py
+   tags them act-t-LAYER (tap switches) or act-h-LAYER (hold switches). */
+g[class*="act-t-"] text.tap, g[class*="act-h-"] text.hold { fill: var(--misc); font-weight: 700; }
+.act-t-nav text.tap, .act-h-nav text.hold { fill: var(--nav); }
+.act-t-fn text.tap, .act-h-fn text.hold { fill: var(--fn); }
+.act-t-num text.tap, .act-h-num text.hold { fill: var(--num); }
+.act-t-sys text.tap, .act-h-sys text.hold { fill: var(--sys); }
+.act-t-mouse text.tap, .act-h-mouse text.hold { fill: var(--mouse); }
+.act-t-game text.tap, .act-h-game text.hold,
+.act-t-game-fn text.tap, .act-h-game-fn text.hold { fill: var(--game); }
+
+/* overview corners: fn top-left, nav top-right, num bottom-left, sys bottom-right */
+text.tl, use.tl { fill: var(--fn); }
+text.tr, use.tr { fill: var(--nav); }
+text.bl, use.bl { fill: var(--num); }
+text.br, use.br { fill: var(--sys); }
+
+svg path { fill: inherit; }
+use.hold, use.shifted { fill: var(--sub); }
+</style>
+<g transform="translate(16, 0)" class="layer-Dota 2">
+<text x="0" y="22" class="label" id="Dota-2">Dota 2</text>
+<g transform="translate(0, 44)">
+<g transform="translate(38, 45)" class="key grp-system keypos-0">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key grp-system"/>
+<text x="0" y="1" class="key grp-system tap">Esc</text>
+<text x="0" y="-25" class="key grp-system shifted">Esc</text>
+</g>
+<g transform="translate(105, 45)" class="key grp-unit keypos-1">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Grp6</text>
+<text x="0" y="-25" class="key grp-unit shifted">6</text>
+</g>
+<g transform="translate(165, 30)" class="key grp-unit keypos-2">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">All</text>
+<text x="0" y="-25" class="key grp-unit shifted">1</text>
+</g>
+<g transform="translate(225, 30)" class="key grp-unit keypos-3">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Others</text>
+<text x="0" y="-25" class="key grp-unit shifted">2</text>
+</g>
+<g transform="translate(285, 30)" class="key grp-unit keypos-4">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Grp1</text>
+<text x="0" y="-25" class="key grp-unit shifted">3</text>
+</g>
+<g transform="translate(345, 30)" class="key grp-unit keypos-5">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Grp2</text>
+<text x="0" y="-25" class="key grp-unit shifted">4</text>
+</g>
+<g transform="translate(405, 30)" class="key grp-unit keypos-6">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Grp3</text>
+<text x="0" y="-25" class="key grp-unit shifted">5</text>
+</g>
+<g transform="translate(675, 30)" class="key keypos-7">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key"/>
+<text x="0" y="1" class="key tap">Boot</text>
+</g>
+<g transform="translate(735, 30)" class="key keypos-8">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key"/>
+</g>
+<g transform="translate(795, 30)" class="key grp-unit keypos-9">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Grp7</text>
+<text x="0" y="-25" class="key grp-unit shifted">7</text>
+</g>
+<g transform="translate(855, 30)" class="key grp-unit keypos-10">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Grp8</text>
+<text x="0" y="-25" class="key grp-unit shifted">8</text>
+</g>
+<g transform="translate(915, 30)" class="key grp-unit keypos-11">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Grp9</text>
+<text x="0" y="-25" class="key grp-unit shifted">9</text>
+</g>
+<g transform="translate(975, 45)" class="key keypos-12">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key"/>
+</g>
+<g transform="translate(1042, 45)" class="key keypos-13">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key"/>
+<text x="0" y="1" class="key tap">Studio</text>
+</g>
+<g transform="translate(38, 105)" class="key grp-unit keypos-14">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Hero</text>
+<text x="0" y="-25" class="key grp-unit shifted">F1</text>
+</g>
+<g transform="translate(105, 105)" class="key grp-item keypos-15">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-item"/>
+<text x="0" y="1" class="key grp-item tap">It1</text>
+<text x="0" y="-25" class="key grp-item shifted">Y</text>
+</g>
+<g transform="translate(165, 90)" class="key grp-item keypos-16">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-item"/>
+<text x="0" y="1" class="key grp-item tap">It2</text>
+<text x="0" y="-25" class="key grp-item shifted">Q</text>
+</g>
+<g transform="translate(225, 90)" class="key grp-item keypos-17">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-item"/>
+<text x="0" y="1" class="key grp-item tap">It3</text>
+<text x="0" y="-25" class="key grp-item shifted">W</text>
+</g>
+<g transform="translate(285, 90)" class="key grp-item keypos-18">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-item"/>
+<text x="0" y="1" class="key grp-item tap">It4</text>
+<text x="0" y="-25" class="key grp-item shifted">E</text>
+</g>
+<g transform="translate(345, 90)" class="key grp-item keypos-19">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-item"/>
+<text x="0" y="1" class="key grp-item tap">It5</text>
+<text x="0" y="-25" class="key grp-item shifted">R</text>
+</g>
+<g transform="translate(405, 90)" class="key grp-item keypos-20">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-item"/>
+<text x="0" y="1" class="key grp-item tap">TP</text>
+<text x="0" y="-25" class="key grp-item shifted">T</text>
+</g>
+<g transform="translate(675, 90)" class="key keypos-21">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key"/>
+<text x="0" y="1" class="key tap">Base</text>
+<text x="0" y="-25" class="key shifted">toggle</text>
+</g>
+<g transform="translate(735, 90)" class="key grp-item keypos-22">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-item"/>
+<text x="0" y="1" class="key grp-item tap">It1</text>
+<text x="0" y="-25" class="key grp-item shifted">Y</text>
+</g>
+<g transform="translate(795, 90)" class="key unbound keypos-23">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">U</text>
+</g>
+<g transform="translate(855, 90)" class="key grp-system keypos-24">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-system"/>
+<text x="0" y="1" class="key grp-system tap">Score</text>
+<text x="0" y="-25" class="key grp-system shifted">I</text>
+</g>
+<g transform="translate(915, 90)" class="key unbound keypos-25">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">O</text>
+</g>
+<g transform="translate(975, 105)" class="key grp-chat keypos-26">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-chat"/>
+<text x="0" y="1" class="key grp-chat tap">Scan</text>
+<text x="0" y="-25" class="key grp-chat shifted">P</text>
+</g>
+<g transform="translate(1042, 105)" class="key mod keypos-27">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key mod"/>
+<text x="0" y="1" class="key mod tap">Alt</text>
+<text x="0" y="-25" class="key mod shifted"><tspan style="font-size: 88%">modifier</tspan></text>
+</g>
+<g transform="translate(38, 165)" class="key grp-unit keypos-28">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Cycle</text>
+<text x="0" y="-25" class="key grp-unit shifted">Tab</text>
+</g>
+<g transform="translate(105, 165)" class="key grp-ability keypos-29">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-ability"/>
+<text x="0" y="1" class="key grp-ability tap">Ab1</text>
+<text x="0" y="-25" class="key grp-ability shifted">H</text>
+</g>
+<g transform="translate(165, 150)" class="key grp-ability keypos-30">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-ability"/>
+<text x="0" y="1" class="key grp-ability tap">Ab2</text>
+<text x="0" y="-25" class="key grp-ability shifted">A</text>
+</g>
+<g transform="translate(225, 150)" class="key grp-ability keypos-31">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-ability"/>
+<text x="0" y="1" class="key grp-ability tap">Ab3</text>
+<text x="0" y="-25" class="key grp-ability shifted">S</text>
+</g>
+<g transform="translate(285, 150)" class="key grp-ability keypos-32">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-ability"/>
+<text x="0" y="1" class="key grp-ability tap">Ult</text>
+<text x="0" y="-25" class="key grp-ability shifted">D</text>
+</g>
+<g transform="translate(345, 150)" class="key grp-unit keypos-33">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Attack</text>
+<text x="0" y="-25" class="key grp-unit shifted">F</text>
+</g>
+<g transform="translate(405, 150)" class="key grp-chat keypos-34">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-chat"/>
+<text x="0" y="1" class="key grp-chat tap">Wheel</text>
+<text x="0" y="-25" class="key grp-chat shifted">G</text>
+</g>
+<g transform="translate(675, 150)" class="key keypos-35">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key"/>
+<text x="0" y="1" class="key tap">Game</text>
+<text x="0" y="-25" class="key shifted">toggle</text>
+</g>
+<g transform="translate(735, 150)" class="key grp-ability keypos-36">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-ability"/>
+<text x="0" y="1" class="key grp-ability tap">Ab1</text>
+<text x="0" y="-25" class="key grp-ability shifted">H</text>
+</g>
+<g transform="translate(795, 150)" class="key grp-chat keypos-37">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-chat"/>
+<text x="0" y="1" class="key grp-chat tap">Glyph</text>
+<text x="0" y="-25" class="key grp-chat shifted">J</text>
+</g>
+<g transform="translate(855, 150)" class="key grp-chat keypos-38">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-chat"/>
+<text x="0" y="1" class="key grp-chat tap">
+<tspan x="0" dy="-0.3em">Hero</tspan><tspan x="0" dy="1.2em">wheel</tspan>
+</text>
+<text x="0" y="-25" class="key grp-chat shifted">K</text>
+</g>
+<g transform="translate(915, 150)" class="key unbound keypos-39">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">L</text>
+</g>
+<g transform="translate(975, 165)" class="key unbound keypos-40">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">;</text>
+</g>
+<g transform="translate(1042, 165)" class="key grp-chat keypos-41">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key grp-chat"/>
+<text x="0" y="1" class="key grp-chat tap">Chat</text>
+<text x="0" y="25" class="key grp-chat hold"><tspan style="font-size: 64%">Shift: All…</tspan></text>
+<text x="0" y="-25" class="key grp-chat shifted">Enter</text>
+</g>
+<g transform="translate(38, 225)" class="key mod keypos-42">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key mod"/>
+<text x="0" y="1" class="key mod tap">Ctrl</text>
+<text x="0" y="-25" class="key mod shifted"><tspan style="font-size: 88%">modifier</tspan></text>
+</g>
+<g transform="translate(105, 225)" class="key grp-ability keypos-43">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-ability"/>
+<text x="0" y="1" class="key grp-ability tap">Learn</text>
+<text x="0" y="-25" class="key grp-ability shifted">N</text>
+</g>
+<g transform="translate(165, 210)" class="key grp-item keypos-44">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-item"/>
+<text x="0" y="1" class="key grp-item tap">It6</text>
+<text x="0" y="-25" class="key grp-item shifted">Z</text>
+</g>
+<g transform="translate(225, 210)" class="key grp-unit keypos-45">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Stop</text>
+<text x="0" y="-25" class="key grp-unit shifted">X</text>
+</g>
+<g transform="translate(285, 210)" class="key grp-ability keypos-46">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-ability"/>
+<text x="0" y="1" class="key grp-ability tap">Ab4</text>
+<text x="0" y="-25" class="key grp-ability shifted">C</text>
+</g>
+<g transform="translate(345, 210)" class="key grp-ability keypos-47">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-ability"/>
+<text x="0" y="1" class="key grp-ability tap">Ab5</text>
+<text x="0" y="-25" class="key grp-ability shifted">V</text>
+</g>
+<g transform="translate(735, 210)" class="key grp-ability keypos-48">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-ability"/>
+<text x="0" y="1" class="key grp-ability tap">Learn</text>
+<text x="0" y="-25" class="key grp-ability shifted">N</text>
+</g>
+<g transform="translate(795, 210)" class="key grp-unit keypos-49">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Move</text>
+<text x="0" y="-25" class="key grp-unit shifted">M</text>
+</g>
+<g transform="translate(855, 210)" class="key unbound keypos-50">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">,</text>
+</g>
+<g transform="translate(915, 210)" class="key unbound keypos-51">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">.</text>
+</g>
+<g transform="translate(975, 225)" class="key unbound keypos-52">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">/</text>
+</g>
+<g transform="translate(1042, 225)" class="key mod keypos-53">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key mod"/>
+<text x="0" y="1" class="key mod tap">Shift</text>
+<text x="0" y="-25" class="key mod shifted"><tspan style="font-size: 88%">modifier</tspan></text>
+</g>
+<g transform="translate(38, 285)" class="key grp-system keypos-54">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key grp-system"/>
+<text x="0" y="1" class="key grp-system tap">Score</text>
+<text x="0" y="-25" class="key grp-system shifted">I</text>
+</g>
+<g transform="translate(105, 285)" class="key keypos-55">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key"/>
+</g>
+<g transform="translate(165, 270)" class="key grp-chat keypos-56">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-chat"/>
+<text x="0" y="1" class="key grp-chat tap">Chat</text>
+<text x="0" y="25" class="key grp-chat hold"><tspan style="font-size: 64%">Shift: All…</tspan></text>
+<text x="0" y="-25" class="key grp-chat shifted">Enter</text>
+</g>
+<g transform="translate(225, 270)" class="key grp-camera keypos-57">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-camera"/>
+<text x="0" y="1" class="key grp-camera tap">
+<tspan x="0" dy="-0.3em">Cam</tspan><tspan x="0" dy="1.2em">←</tspan>
+</text>
+<text x="0" y="-25" class="key grp-camera shifted">←</text>
+</g>
+<g transform="translate(285, 270)" class="key grp-item keypos-58">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-item"/>
+<text x="0" y="1" class="key grp-item tap">Neutral</text>
+<text x="0" y="-25" class="key grp-item shifted">→</text>
+</g>
+<g transform="translate(795, 270)" class="key grp-camera keypos-59">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-camera"/>
+<text x="0" y="1" class="key grp-camera tap">
+<tspan x="0" dy="-0.3em">Cam</tspan><tspan x="0" dy="1.2em">↑</tspan>
+</text>
+<text x="0" y="-25" class="key grp-camera shifted">↑</text>
+</g>
+<g transform="translate(855, 270)" class="key grp-camera keypos-60">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-camera"/>
+<text x="0" y="1" class="key grp-camera tap">
+<tspan x="0" dy="-0.3em">Cam</tspan><tspan x="0" dy="1.2em">↓</tspan>
+</text>
+<text x="0" y="-25" class="key grp-camera shifted">↓</text>
+</g>
+<g transform="translate(915, 270)" class="key keypos-61">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key"/>
+</g>
+<g transform="translate(975, 285)" class="key keypos-62">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key"/>
+</g>
+<g transform="translate(1042, 285)" class="key keypos-63">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key"/>
+</g>
+<g transform="translate(423, 300) rotate(15.0)" class="key keypos-64">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key"/>
+<text x="0" y="1" class="key tap">Alt-Tab</text>
+</g>
+<g transform="translate(481, 316) rotate(15.0)" class="key keypos-65">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key"/>
+<text x="0" y="1" class="key tap">Game</text>
+<text x="0" y="-25" class="key shifted">toggle</text>
+</g>
+<g transform="translate(599, 316) rotate(-15.0)" class="key unbound keypos-66">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">Gui</text>
+</g>
+<g transform="translate(657, 300) rotate(-15.0)" class="key mod keypos-67">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key mod"/>
+<text x="0" y="1" class="key mod tap">Ctrl</text>
+<text x="0" y="-25" class="key mod shifted"><tspan style="font-size: 88%">modifier</tspan></text>
+</g>
+<g transform="translate(342, 371) rotate(15.0)" class="key grp-camera keypos-68">
+<rect rx="7" ry="7" x="-28" y="-58" width="56" height="116" class="key grp-camera"/>
+<text x="0" y="1" class="key grp-camera tap">Event</text>
+<text x="0" y="-55" class="key grp-camera shifted">Space</text>
+</g>
+<g transform="translate(400, 387) rotate(15.0)" class="key mod keypos-69">
+<rect rx="7" ry="7" x="-28" y="-58" width="56" height="116" class="key mod"/>
+<text x="0" y="1" class="key mod tap">Alt</text>
+<text x="0" y="-55" class="key mod shifted"><tspan style="font-size: 88%">modifier</tspan></text>
+</g>
+<g transform="translate(466, 374) rotate(15.0)" class="key mod keypos-70">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key mod"/>
+<text x="0" y="1" class="key mod tap">Shift</text>
+<text x="0" y="-25" class="key mod shifted"><tspan style="font-size: 88%">modifier</tspan></text>
+</g>
+<g transform="translate(614, 374) rotate(-15.0)" class="key unbound keypos-71">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">PgUp</text>
+</g>
+<g transform="translate(680, 387) rotate(-15.0)" class="key grp-ability keypos-72">
+<rect rx="7" ry="7" x="-28" y="-58" width="56" height="116" class="key grp-ability"/>
+<text x="0" y="1" class="key grp-ability tap">Ab5</text>
+<text x="0" y="-55" class="key grp-ability shifted">V</text>
+</g>
+<g transform="translate(738, 371) rotate(-15.0)" class="key grp-ability keypos-73">
+<rect rx="7" ry="7" x="-28" y="-58" width="56" height="116" class="key grp-ability"/>
+<text x="0" y="1" class="key grp-ability tap">Learn</text>
+<text x="0" y="-55" class="key grp-ability shifted">N</text>
+</g>
+<g transform="translate(450, 431) rotate(15.0)" class="key act-h-game-fn keypos-74">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key act-h-game-fn"/>
+<text x="0" y="1" class="key act-h-game-fn tap">Fn</text>
+<text x="0" y="25" class="key act-h-game-fn hold">hold</text>
+</g>
+<g transform="translate(630, 431) rotate(-15.0)" class="key unbound keypos-75">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">PgDn</text>
+</g>
+</g>
+</g>
+<g transform="translate(16, 512)" class="layer-Dota 2 Fn">
+<text x="0" y="22" class="label" id="Dota-2-Fn">Dota 2 Fn</text>
+<g transform="translate(0, 44)">
+<g transform="translate(38, 45)" class="key keypos-0">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key"/>
+<text x="0" y="1" class="key tap">
+<tspan x="0" dy="-0.3em">Dota</tspan><tspan x="0" dy="1.2em">mode</tspan>
+</text>
+<text x="0" y="-25" class="key shifted">toggle</text>
+</g>
+<g transform="translate(105, 45)" class="key grp-system keypos-1">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-system"/>
+<text x="0" y="1" class="key grp-system tap">Shot</text>
+<text x="0" y="-25" class="key grp-system shifted">F6</text>
+</g>
+<g transform="translate(165, 30)" class="key grp-unit keypos-2">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Hero</text>
+<text x="0" y="-25" class="key grp-unit shifted">F1</text>
+</g>
+<g transform="translate(225, 30)" class="key grp-shop keypos-3">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-shop"/>
+<text x="0" y="1" class="key grp-shop tap">Sticky</text>
+<text x="0" y="-25" class="key grp-shop shifted">F2</text>
+</g>
+<g transform="translate(285, 30)" class="key grp-shop keypos-4">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-shop"/>
+<text x="0" y="1" class="key grp-shop tap">Scout</text>
+<text x="0" y="-25" class="key grp-shop shifted">F3</text>
+</g>
+<g transform="translate(345, 30)" class="key grp-shop keypos-5">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-shop"/>
+<text x="0" y="1" class="key grp-shop tap">Shop</text>
+<text x="0" y="-25" class="key grp-shop shifted">F4</text>
+</g>
+<g transform="translate(405, 30)" class="key grp-system keypos-6">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-system"/>
+<text x="0" y="1" class="key grp-system tap">Pause</text>
+<text x="0" y="-25" class="key grp-system shifted">F5</text>
+</g>
+<g transform="translate(675, 30)" class="key trans keypos-7">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(735, 30)" class="key trans keypos-8">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(795, 30)" class="key trans keypos-9">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(855, 30)" class="key trans keypos-10">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(915, 30)" class="key trans keypos-11">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(975, 45)" class="key trans keypos-12">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(1042, 45)" class="key trans keypos-13">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key trans"/>
+</g>
+<g transform="translate(38, 105)" class="key trans keypos-14">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key trans"/>
+</g>
+<g transform="translate(105, 105)" class="key trans keypos-15">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(165, 90)" class="key grp-unit keypos-16">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Grp6</text>
+<text x="0" y="-25" class="key grp-unit shifted">6</text>
+</g>
+<g transform="translate(225, 90)" class="key grp-unit keypos-17">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Grp7</text>
+<text x="0" y="-25" class="key grp-unit shifted">7</text>
+</g>
+<g transform="translate(285, 90)" class="key grp-unit keypos-18">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Grp8</text>
+<text x="0" y="-25" class="key grp-unit shifted">8</text>
+</g>
+<g transform="translate(345, 90)" class="key grp-unit keypos-19">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Grp9</text>
+<text x="0" y="-25" class="key grp-unit shifted">9</text>
+</g>
+<g transform="translate(405, 90)" class="key grp-unit keypos-20">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Grp10</text>
+<text x="0" y="-25" class="key grp-unit shifted">0</text>
+</g>
+<g transform="translate(675, 90)" class="key trans keypos-21">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(735, 90)" class="key trans keypos-22">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(795, 90)" class="key trans keypos-23">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(855, 90)" class="key trans keypos-24">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(915, 90)" class="key trans keypos-25">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(975, 105)" class="key trans keypos-26">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(1042, 105)" class="key trans keypos-27">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key trans"/>
+</g>
+<g transform="translate(38, 165)" class="key trans keypos-28">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key trans"/>
+</g>
+<g transform="translate(105, 165)" class="key trans keypos-29">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(165, 150)" class="key grp-shop keypos-30">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-shop"/>
+<text x="0" y="1" class="key grp-shop tap">Deliver</text>
+<text x="0" y="-25" class="key grp-shop shifted">F7</text>
+</g>
+<g transform="translate(225, 150)" class="key grp-shop keypos-31">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-shop"/>
+<text x="0" y="1" class="key grp-shop tap"><tspan style="font-size: 88%">Quickbuy</tspan></text>
+<text x="0" y="-25" class="key grp-shop shifted">F8</text>
+</g>
+<g transform="translate(285, 150)" class="key grp-shop keypos-32">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-shop"/>
+<text x="0" y="1" class="key grp-shop tap">Courier</text>
+<text x="0" y="-25" class="key grp-shop shifted">F9</text>
+</g>
+<g transform="translate(345, 150)" class="key grp-ability keypos-33">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-ability"/>
+<text x="0" y="1" class="key grp-ability tap">Stats</text>
+<text x="0" y="-25" class="key grp-ability shifted">F10</text>
+</g>
+<g transform="translate(405, 150)" class="key unbound keypos-34">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">F11</text>
+</g>
+<g transform="translate(675, 150)" class="key trans keypos-35">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(735, 150)" class="key trans keypos-36">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(795, 150)" class="key trans keypos-37">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(855, 150)" class="key trans keypos-38">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(915, 150)" class="key trans keypos-39">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(975, 165)" class="key trans keypos-40">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(1042, 165)" class="key trans keypos-41">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key trans"/>
+</g>
+<g transform="translate(38, 225)" class="key unbound keypos-42">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">PrtSc</text>
+</g>
+<g transform="translate(105, 225)" class="key trans keypos-43">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(165, 210)" class="key unbound keypos-44">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">F12</text>
+</g>
+<g transform="translate(225, 210)" class="key unbound keypos-45">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">`</text>
+</g>
+<g transform="translate(285, 210)" class="key unbound keypos-46">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">-</text>
+</g>
+<g transform="translate(345, 210)" class="key unbound keypos-47">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">=</text>
+</g>
+<g transform="translate(735, 210)" class="key trans keypos-48">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(795, 210)" class="key trans keypos-49">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(855, 210)" class="key trans keypos-50">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(915, 210)" class="key trans keypos-51">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(975, 225)" class="key trans keypos-52">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(1042, 225)" class="key trans keypos-53">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key trans"/>
+</g>
+<g transform="translate(38, 285)" class="key unbound keypos-54">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">Mute</text>
+</g>
+<g transform="translate(105, 285)" class="key trans keypos-55">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(165, 270)" class="key unbound keypos-56">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">Play</text>
+</g>
+<g transform="translate(225, 270)" class="key unbound keypos-57">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">Vol −</text>
+</g>
+<g transform="translate(285, 270)" class="key unbound keypos-58">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">Vol +</text>
+</g>
+<g transform="translate(795, 270)" class="key trans keypos-59">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(855, 270)" class="key trans keypos-60">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(915, 270)" class="key trans keypos-61">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(975, 285)" class="key trans keypos-62">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(1042, 285)" class="key trans keypos-63">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key trans"/>
+</g>
+<g transform="translate(423, 300) rotate(15.0)" class="key trans keypos-64">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(481, 316) rotate(15.0)" class="key trans keypos-65">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(599, 316) rotate(-15.0)" class="key trans keypos-66">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(657, 300) rotate(-15.0)" class="key trans keypos-67">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(342, 371) rotate(15.0)" class="key trans keypos-68">
+<rect rx="7" ry="7" x="-28" y="-58" width="56" height="116" class="key trans"/>
+</g>
+<g transform="translate(400, 387) rotate(15.0)" class="key trans keypos-69">
+<rect rx="7" ry="7" x="-28" y="-58" width="56" height="116" class="key trans"/>
+</g>
+<g transform="translate(466, 374) rotate(15.0)" class="key unbound keypos-70">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">Bksp</text>
+</g>
+<g transform="translate(614, 374) rotate(-15.0)" class="key trans keypos-71">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+<g transform="translate(680, 387) rotate(-15.0)" class="key trans keypos-72">
+<rect rx="7" ry="7" x="-28" y="-58" width="56" height="116" class="key trans"/>
+</g>
+<g transform="translate(738, 371) rotate(-15.0)" class="key trans keypos-73">
+<rect rx="7" ry="7" x="-28" y="-58" width="56" height="116" class="key trans"/>
+</g>
+<g transform="translate(450, 431) rotate(15.0)" class="key held on-game-fn keypos-74">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key held on-game-fn"/>
+<text x="0" y="1" class="key held on-game-fn tap">Fn</text>
+</g>
+<g transform="translate(630, 431) rotate(-15.0)" class="key trans keypos-75">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
+</g>
+</g>
+</g>
+</svg>

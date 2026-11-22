@@ -50,26 +50,91 @@ def clean_svg(svg: str) -> str:
 CROP = 28  # draw_config.outer_pad_h minus a margin
 
 
+REPO = "https://github.com/eloback/zmk-config/blob/main"
+
+# Game pages (game.py): bind group -> color token.
+GROUP_COLOR = {
+    "ability": "nav", "item": "game", "unit": "sys", "camera": "mouse",
+    "shop": "fn", "chat": "num", "system": "misc", "other": "misc",
+}
+
+
+def kbds(keys: str) -> str:
+    """ "Fn + F7" -> <kbd>Fn</kbd>+<kbd>F7</kbd> """
+    return "+".join(f"<kbd>{html.escape(k)}</kbd>" for k in keys.split(" + "))
+
+
+def bind_item(b: dict) -> str:
+    words = html.escape(f"{b['name']} {b['t']} {b['keys']} {b['action']}".lower())
+    return (
+        f'<li data-words="{words}"><span class="out">{html.escape(b["name"])}</span>'
+        f'<span class="keys">{kbds(b["keys"])}</span></li>'
+    )
+
+
+def game_section(g: dict) -> str:
+    """The bind list under a game's board."""
+    e = html.escape
+    out = [f'<section class="game" data-game="{e(g["slug"])}" hidden>', f"<h2>{e(g['title'])}</h2>"]
+    out.append(
+        "<p>Keyboard in <b>game mode</b>, switched to Dota mode with <b>Fn</b> + the number row's far-left key. "
+        f'The binds are drawn from the game\'s own hotkey file, <a href="{REPO}/games/{e(g["slug"])}">games/{e(g["slug"])}</a>, '
+        "where the README explains how to install them.</p>"
+    )
+    if g["unreachable"]:
+        items = ", ".join(f"{e(r['name'])} (<kbd>{e(r['key'])}</kbd>)" for r in g["unreachable"])
+        out.append(f'<p class="warn"><b>Not reachable in game mode:</b> {items}. Rebind them in game.</p>')
+    if g["autocast"]:
+        out.append("<p><b>Autocast:</b> Alt + an ability or item key.</p>")
+    out.append('<div class="bind-groups">')
+    for group, title in g["groups"].items():
+        rows = [b for b in g["binds"] if b["group"] == group]
+        if not rows:
+            continue
+        dot = f'<span class="dot" style="background: var(--{GROUP_COLOR.get(group, "misc")})"></span>'
+        out.append(f'<div class="bind-group"><h3>{dot}{e(title)}</h3><ul class="binds">')
+        out += [bind_item(b) for b in rows]
+        out.append("</ul></div>")
+    out.append("</div>")
+    if g["menus"]:
+        out.append(
+            f'<details><summary>Menu-only binds ({len(g["menus"])}): shop, talents, spectating</summary>'
+            '<ul class="binds menus">' + "".join(bind_item(b) for b in g["menus"]) + "</ul></details>"
+        )
+    out.append("</section>")
+    return "\n".join(out)
+
+
 def main() -> None:
     combos_json, layers_txt, site = Path(sys.argv[1]), Path(sys.argv[2]), Path(sys.argv[3])
+    games = [json.loads(Path(p).read_text()) for p in sys.argv[4:]]
     names = [l for l in layers_txt.read_text().splitlines() if l]
-    tabs = [("Overview", "overview")] + [(n, str(i)) for i, n in enumerate(names)]
+    # (name, svg file, game slug)
+    tabs = [("Overview", "overview", "")] + [(n, str(i), "") for i, n in enumerate(names)]
+    for g in games:
+        tabs += [(layer, f"{g['slug']}-{i}", g["slug"]) for i, layer in enumerate(g["layers"])]
 
     panels, buttons = [], []
-    for i, (name, file) in enumerate(tabs):
+    for i, (name, file, game) in enumerate(tabs):
         svg = clean_svg((site / "layers" / f"{file}.svg").read_text())
         slug = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
-        color = LAYER_COLOR.get(name, "misc" if name not in ("Overview", "Base") else "")
+        if game:
+            color = "game"
+        else:
+            color = LAYER_COLOR.get(name, "misc" if name not in ("Overview", "Base") else "")
         dot = f'<span class="dot" style="background: var(--{color})"></span>' if color else ""
         key = f"<kbd>{i}</kbd>" if i < 10 else ""
+        if game and not tabs[i - 1][2]:
+            buttons.append('<span class="sep" aria-hidden="true">Games</span>')
         buttons.append(
-            f'<button role="tab" id="tab-{slug}" data-layer="{slug}" aria-controls="panel-{slug}">'
+            f'<button role="tab" id="tab-{slug}" data-layer="{slug}" data-game="{game}" aria-controls="panel-{slug}">'
             f'{dot}<span class="name">{html.escape(name)}</span>{key}<span class="count"></span></button>'
         )
         panels.append(f'<section role="tabpanel" id="panel-{slug}" data-layer="{slug}" hidden>{svg}</section>')
 
     page = TEMPLATE.replace("{{TABS}}", "\n      ".join(buttons)).replace("{{PANELS}}", "\n    ".join(panels))
-    page = page.replace("{{NAMES}}", json.dumps([n for n, _ in tabs]))
+    page = page.replace("{{GAMES}}", "\n".join(game_section(g) for g in games))
+    page = page.replace("{{NAMES}}", json.dumps([n for n, _, _ in tabs]))
     page = page.replace("{{COMBOS}}", combos_json.read_text())
     (site / "index.html").write_text(page)
 
@@ -97,6 +162,7 @@ TEMPLATE = """<!doctype html>
     }
   }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   body {
     margin: 0; background: var(--bg); color: var(--text);
     font: 15px/1.5 Inter, "SF Pro Text", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -167,6 +233,31 @@ TEMPLATE = """<!doctype html>
     border: 1px solid var(--line); background: var(--bg); color: var(--text);
   }
   .status { min-height: 1.5em; color: var(--sub); font-size: 14px; margin: 0 0 8px; }
+  .sep {
+    align-self: center; margin-left: 10px; padding-left: 12px; border-left: 1px solid var(--line);
+    color: var(--sub); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  /* game pages: the bind list under the board */
+  .game { margin-top: 20px; }
+  .game h2 { font-size: 17px; margin: 0 0 4px; }
+  .game > p { margin: 0 0 10px; color: var(--sub); font-size: 14px; max-width: 80ch; }
+  .game a { color: var(--accent); }
+  .game .warn { color: var(--text); border-left: 3px solid var(--hit); padding: 4px 10px; background: var(--surface); }
+  .bind-groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px 24px; margin-top: 12px; }
+  .bind-group h3 { display: flex; align-items: center; gap: 6px; font-size: 14px; margin: 0 0 6px; }
+  ul.binds { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+  ul.binds li {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    padding: 4px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); font-size: 14px;
+  }
+  ul.binds .keys { display: flex; gap: 3px; align-items: center; color: var(--sub); font-size: 12px; white-space: nowrap; }
+  ul.binds kbd, .game kbd {
+    font: 600 12px/1 ui-monospace, monospace; padding: 3px 5px; border-radius: 4px;
+    border: 1px solid var(--line); background: var(--bg); color: var(--text);
+  }
+  .game details { margin-top: 16px; }
+  .game summary { cursor: pointer; color: var(--sub); font-size: 14px; }
+  ul.binds.menus { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); margin-top: 8px; }
 </style>
 </head>
 <body>
@@ -197,7 +288,9 @@ TEMPLATE = """<!doctype html>
     <ul id="combo-list"></ul>
   </section>
 
-  <div class="legend">
+  {{GAMES}}
+
+  <div class="legend" id="legend">
     <div><b>Center</b> tap &middot; <b>bottom</b> hold &middot; <b>top</b> shifted</div>
     <div><b>Blank key</b>: same as the layer below</div>
     <div><b>Colored key</b>: held to reach this layer. Click a colored layer name to open it.</div>
@@ -336,16 +429,29 @@ for (const c of combosOf("combos")) {
   listItems.set(c, li);
 }
 
-// Show the list on the tabs that draw these combos; search filters it.
+// Show the combo list on the tabs that draw these combos, and a game's bind
+// list on its tabs. Search filters both.
+const games = [...document.querySelectorAll("section.game")];
+const legend = document.getElementById("legend");
 const baseShow = show;
 show = (layer, push = true) => {
   baseShow(layer, push);
-  comboSection.hidden = !["combos", "overview"].includes(tabs[current()].dataset.layer);
+  const tab = tabs[current()];
+  comboSection.hidden = !["combos", "overview"].includes(tab.dataset.layer);
+  for (const g of games) g.hidden = g.dataset.game !== tab.dataset.game;
+  legend.hidden = tab.dataset.game !== "";
 };
+const bindItems = [...document.querySelectorAll("ul.binds li")];
 function filterCombos() {
   const term = q.value.trim().toLowerCase();
-  for (const li of listItems.values())
-    li.hidden = term !== "" && !matches(li.dataset.words.split(" ").filter(Boolean), term);
+  const miss = el => term !== "" && !matches(el.dataset.words.split(" ").filter(Boolean), term);
+  for (const li of listItems.values()) li.hidden = miss(li);
+  for (const li of bindItems) li.hidden = miss(li);
+  // open the menu-only list when the search hits one of its binds
+  for (const d of document.querySelectorAll("section.game details"))
+    if (term && [...d.querySelectorAll("li")].some(li => !li.hidden)) d.open = true;
+  for (const grp of document.querySelectorAll(".bind-group"))
+    grp.hidden = ![...grp.querySelectorAll("li")].some(li => !li.hidden);
 }
 
 q.addEventListener("input", search);

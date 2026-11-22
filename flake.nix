@@ -9,6 +9,11 @@
   #
   # When config/west.yml changes, the build fails with a hash mismatch for
   # the west deps. Copy the "got:" hash into zephyrDepsHash below.
+  #
+  # The devshell (`nix develop`, or direnv via .envrc) adds two commands:
+  #
+  #   draw               redraw img/*.svg and site/ (also `nix run .#draw`)
+  #   dota-sync pull     copy Dota 2's hotkeys Steam -> repo (push, diff)
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
@@ -19,6 +24,7 @@
   };
 
   outputs = {
+    self,
     nixpkgs,
     zmk-nix,
     ...
@@ -65,11 +71,27 @@
           runtimeInputs = with pkgs; [keymap-drawer python git gnused gnugrep coreutils];
           text = builtins.readFile ./draw/draw.sh;
         };
+
+      # Copy Dota 2's hotkey file between Steam and the repo (games/dota2/).
+      dota-sync = let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+        pkgs.writeShellApplication {
+          name = "dota-sync";
+          runtimeInputs = with pkgs; [coreutils diffutils procps git];
+          text = builtins.readFile ./games/dota2/sync.sh;
+        };
     });
 
-    # west and the ARM toolchain, for poking at the build by hand (.envrc).
+    # west and the ARM toolchain, for poking at the build by hand (.envrc),
+    # plus the draw and dota-sync commands. overrideAttrs keeps zmk-nix's
+    # toolchain variables, which a new mkShell with inputsFrom would drop.
     devShells = forAllSystems (system: {
-      default = zmk-nix.devShells.${system}.default;
+      default = zmk-nix.devShells.${system}.default.overrideAttrs (old: {
+        nativeBuildInputs =
+          (old.nativeBuildInputs or [])
+          ++ [self.packages.${system}.draw self.packages.${system}.dota-sync];
+      });
     });
   };
 }
