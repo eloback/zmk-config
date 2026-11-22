@@ -495,35 +495,34 @@ use.hold, use.shifted { fill: var(--sub); }
 </text>
 <text x="0" y="-25" class="key shifted">toggle</text>
 </g>
-<g transform="translate(105, 45)" class="key grp-system keypos-1">
-<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-system"/>
-<text x="0" y="1" class="key grp-system tap">Shot</text>
-<text x="0" y="-25" class="key grp-system shifted">F6</text>
+<g transform="translate(105, 45)" class="key unbound keypos-1">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">PrtSc</text>
 </g>
 <g transform="translate(165, 30)" class="key grp-unit keypos-2">
 <rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
-<text x="0" y="1" class="key grp-unit tap">Hero</text>
-<text x="0" y="-25" class="key grp-unit shifted">F1</text>
+<text x="0" y="1" class="key grp-unit tap">Grp6</text>
+<text x="0" y="-25" class="key grp-unit shifted">6</text>
 </g>
-<g transform="translate(225, 30)" class="key grp-shop keypos-3">
-<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-shop"/>
-<text x="0" y="1" class="key grp-shop tap">Sticky</text>
-<text x="0" y="-25" class="key grp-shop shifted">F2</text>
+<g transform="translate(225, 30)" class="key grp-unit keypos-3">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Grp7</text>
+<text x="0" y="-25" class="key grp-unit shifted">7</text>
 </g>
-<g transform="translate(285, 30)" class="key grp-shop keypos-4">
-<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-shop"/>
-<text x="0" y="1" class="key grp-shop tap">Scout</text>
-<text x="0" y="-25" class="key grp-shop shifted">F3</text>
+<g transform="translate(285, 30)" class="key grp-unit keypos-4">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Grp8</text>
+<text x="0" y="-25" class="key grp-unit shifted">8</text>
 </g>
-<g transform="translate(345, 30)" class="key grp-shop keypos-5">
-<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-shop"/>
-<text x="0" y="1" class="key grp-shop tap">Shop</text>
-<text x="0" y="-25" class="key grp-shop shifted">F4</text>
+<g transform="translate(345, 30)" class="key grp-unit keypos-5">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Grp9</text>
+<text x="0" y="-25" class="key grp-unit shifted">9</text>
 </g>
-<g transform="translate(405, 30)" class="key grp-system keypos-6">
-<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-system"/>
-<text x="0" y="1" class="key grp-system tap">Pause</text>
-<text x="0" y="-25" class="key grp-system shifted">F5</text>
+<g transform="translate(405, 30)" class="key grp-unit keypos-6">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
+<text x="0" y="1" class="key grp-unit tap">Grp10</text>
+<text x="0" y="-25" class="key grp-unit shifted">0</text>
 </g>
 <g transform="translate(675, 30)" class="key trans keypos-7">
 <rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
@@ -549,33 +548,34 @@ use.hold, use.shifted { fill: var(--sub); }
 <g transform="translate(38, 105)" class="key trans keypos-14">
 <rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key trans"/>
 </g>
-<g transform="translate(105, 105)" class="key trans keypos-15">
-<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
-</g>
-<g transform="translate(165, 90)" class="key grp-unit keypos-16">
+<g transform="translate(105, 105)" class="key grp-unit keypos-15">
 <rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
-<text x="0" y="1" class="key grp-unit tap">Grp6</text>
-<text x="0" y="-25" class="key grp-unit shifted">6</text>
+<text x="0" y="1" class="key grp-unit tap">Hero</text>
+<text x="0" y="-25" class="key grp-unit shifted">F1</text>
 </g>
-<g transform="translate(225, 90)" class="key grp-unit keypos-17">
-<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
-<text x="0" y="1" class="key grp-unit tap">Grp7</text>
-<text x="0" y="-25" class="key grp-unit shifted">7</text>
+<g transform="translate(165, 90)" class="key grp-shop keypos-16">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-shop"/>
+<text x="0" y="1" class="key grp-shop tap">Sticky</text>
+<text x="0" y="-25" class="key grp-shop shifted">F2</text>
 </g>
-<g transform="translate(285, 90)" class="key grp-unit keypos-18">
-<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
-<text x="0" y="1" class="key grp-unit tap">Grp8</text>
-<text x="0" y="-25" class="key grp-unit shifted">8</text>
+<g transform="translate(225, 90)" class="key grp-shop keypos-17">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-shop"/>
+<text x="0" y="1" class="key grp-shop tap">Scout</text>
+<text x="0" y="-25" class="key grp-shop shifted">F3</text>
 </g>
-<g transform="translate(345, 90)" class="key grp-unit keypos-19">
-<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
-<text x="0" y="1" class="key grp-unit tap">Grp9</text>
-<text x="0" y="-25" class="key grp-unit shifted">9</text>
+<g transform="translate(285, 90)" class="key grp-shop keypos-18">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-shop"/>
+<text x="0" y="1" class="key grp-shop tap">Shop</text>
+<text x="0" y="-25" class="key grp-shop shifted">F4</text>
 </g>
-<g transform="translate(405, 90)" class="key grp-unit keypos-20">
-<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-unit"/>
-<text x="0" y="1" class="key grp-unit tap">Grp10</text>
-<text x="0" y="-25" class="key grp-unit shifted">0</text>
+<g transform="translate(345, 90)" class="key unbound keypos-19">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
+<text x="0" y="-25" class="key unbound shifted">F5</text>
+</g>
+<g transform="translate(405, 90)" class="key grp-system keypos-20">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key grp-system"/>
+<text x="0" y="1" class="key grp-system tap">Shot</text>
+<text x="0" y="-25" class="key grp-system shifted">F6</text>
 </g>
 <g transform="translate(675, 90)" class="key trans keypos-21">
 <rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
@@ -649,16 +649,16 @@ use.hold, use.shifted { fill: var(--sub); }
 <g transform="translate(1042, 165)" class="key trans keypos-41">
 <rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key trans"/>
 </g>
-<g transform="translate(38, 225)" class="key unbound keypos-42">
-<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key unbound"/>
-<text x="0" y="-25" class="key unbound shifted">PrtSc</text>
+<g transform="translate(38, 225)" class="key grp-system keypos-42">
+<rect rx="7" ry="7" x="-36" y="-28" width="71" height="56" class="key grp-system"/>
+<text x="0" y="1" class="key grp-system tap">Pause</text>
+<text x="0" y="-25" class="key grp-system shifted">F12</text>
 </g>
 <g transform="translate(105, 225)" class="key trans keypos-43">
 <rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
 </g>
-<g transform="translate(165, 210)" class="key unbound keypos-44">
-<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>
-<text x="0" y="-25" class="key unbound shifted">F12</text>
+<g transform="translate(165, 210)" class="key trans keypos-44">
+<rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key trans"/>
 </g>
 <g transform="translate(225, 210)" class="key unbound keypos-45">
 <rect rx="7" ry="7" x="-28" y="-28" width="56" height="56" class="key unbound"/>

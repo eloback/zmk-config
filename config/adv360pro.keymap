@@ -48,15 +48,16 @@
 #define G_X_MH  &kp M       &kp PG_UP
 #define G_X_RH  &mo GAME_FN  &kp PG_DN
 
-/* game_fn layer (held from the game layer) */
-#define GF_X_LT &tog DOTA_SEL &kp F6 &kp F1 &kp F2 &kp F3 &kp F4 &kp F5     ___ ___ ___ ___ ___ ___ ___ \
+/* game_fn layer (held from the game layer): F1-F6 on the top row, F7-F11 on
+ * home, 6-0 on the number row (Fn + the keys typing 1-5)  */
+#define GF_X_LT &tog DOTA_SEL &kp PSCRN &kp N6 &kp N7 &kp N8 &kp N9 &kp N0     ___ ___ ___ ___ ___ ___ ___ \
                 ___
-#define GF_X_MT &kp N0 ___
+#define GF_X_MT &kp F6 ___
 
 #define GF_X_LM ___
 #define GF_X_MM &kp F11 ___
 
-#define GF_X_LB &kp PSCRN
+#define GF_X_LB &kp F12      // hard corner key: Dota binds pause here
 
 #define GF_X_LH &kp C_MUTE ___ &kp C_PP &kp C_VOL_DN &kp C_VOL_UP     ___ ___ ___ ___ ___ \
                 ___ ___            ___ ___

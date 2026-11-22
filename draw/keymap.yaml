@@ -835,26 +835,26 @@ layers:
   - t: Dota
     s: mode
     type: act-t-dota
-  - t: F6
-  - t: F1
-  - t: F2
-  - t: F3
-  - t: F4
-  - t: F5
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
+  - t: PrtSc
   - t: '6'
   - t: '7'
   - t: '8'
   - t: '9'
   - t: '0'
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - t: F1
+  - t: F2
+  - t: F3
+  - t: F4
+  - t: F5
+  - t: F6
   - type: trans
   - type: trans
   - type: trans
@@ -876,9 +876,9 @@ layers:
   - type: trans
   - type: trans
   - type: trans
-  - t: PrtSc
-  - type: trans
   - t: F12
+  - type: trans
+  - type: trans
   - t: '`'
   - t: '-'
   - t: '='
